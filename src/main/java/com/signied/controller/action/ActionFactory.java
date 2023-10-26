@@ -25,6 +25,8 @@ public class ActionFactory {
 			action = new HotelQnACheckAction();
 		}else if(command.equals("QnA_view")) {
 			action = new HotelQnAViewAction();
+		}else if(command.equals("search_room")){
+			action = new SearchRoomAction();
 		}
 		return action;
 	}
