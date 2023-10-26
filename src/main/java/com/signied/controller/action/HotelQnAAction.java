@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.signied.dao.QnADAO;
 import com.signied.dto.QnAVO;
 
+
 public class HotelQnAAction implements Action {
 
 	@Override

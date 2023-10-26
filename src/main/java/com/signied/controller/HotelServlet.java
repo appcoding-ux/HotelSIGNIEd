@@ -41,4 +41,5 @@ public class HotelServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		doGet(request, response);
 	}
+
 }

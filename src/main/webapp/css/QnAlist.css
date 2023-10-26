@@ -2,7 +2,7 @@
 
 table {width:100%; border:0; border-spacing: 0; border-collapse: collapse;}
 
-table td, th {border-bottom:1px solid #e2e2e2; font-size:14px; padding:18px 0; letter-spacing: 0;}
+table td, th {font-size:14px; padding:18px 0; letter-spacing: 0; border-bottom:1px solid #e2e2e2;}
 table td {text-align: center;}
 table td:nth-child(4) {text-align: left;}
 
@@ -16,3 +16,8 @@ thead th {font-size:14px; font-weight:500; color:#9d9d9d; border-top:2px solid #
 .writeBtn a:hover {color:#fff; background:#787878;}
 
 .QnAlistTable {margin-top:5px;}
+
+/* 관리자 답글 달기 버튼 */
+.adminReply { height:20px;padding:0; text-align:right; border-bottom:1px solid #e2e2e2;}
+.adminReply > a {padding:0 15px 5px; font-size:14px; margin-bottom:5px;}
+.adminReply > a > i {rotate: 90deg;}

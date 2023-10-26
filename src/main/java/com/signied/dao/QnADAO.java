@@ -110,4 +110,25 @@ public class QnADAO {
 		
 		return vo;
 	}
+
+	public int delteQnA(int num) {
+		int result = 0;
+		Connection con = null;
+		PreparedStatement ps = null;
+		String sql = "delete from qna where qnanum = ?";
+		
+		try {
+			con = DBManager.getConnection();
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, num);
+			
+			result = ps.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBManager.close(con, ps);
+		}
+		
+		return result;
+	}
 }
