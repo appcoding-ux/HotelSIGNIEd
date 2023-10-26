@@ -1,6 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.7.1.min.js"></script>
+<link rel="stylesheet" href="hotel-datepicker-main/dist/css/hotel-datepicker.css">
+<script src="hotel-datepicker-main/dist/fecha.js"></script>
+<script src="hotel-datepicker-main/fecha-4.2.1/dist/fecha.min.js"></script>
+<script src="hotel-datepicker-main/dist/js/hotel-datepicker.js"></script>
+<link rel="stylesheet" href="css/search.css">
+<script src="js/search.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+	href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap"
+	rel="stylesheet">
+</head>
+<body>
+
 <div class="header">
 	<a href="index.jsp"><img src="hotel_logo.png" alt="호텔로고사진"></a>
 
@@ -11,7 +30,6 @@
 			<li><a href="">QnA</a></li>
 		</ul>
 	</nav>
-
 	<div class="sertchWrap">
 		<div class="hotelSertch">
 			<form action="HotelServlet" name="frm" method="post">
@@ -49,7 +67,7 @@
 					<a href="" title="레이어팝업" class="date_anchor"></a>
 				</div>
 				<div class="item_edit">
-					<button type="submit" class="sertchButton">검색</button>
+					<button type="submit" class="sertchButton">수정</button>
 				</div>
 
 				<div class="dateInput">
@@ -74,4 +92,6 @@
 			</form>
 		</div>
 	</div>
-</div>
+	</div>
+</body>
+</html>
