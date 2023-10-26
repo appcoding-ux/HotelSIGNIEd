@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,11 +29,11 @@
 			상담내용
 		</h3>
 		<form action="HotelServlet" method="post" name="frm">
-			<input type="hidden" name="command" value="" />
+			<input type="hidden" name="command" value="QnA_delete" />
 			<div class="row">
 				<label for="QnAcategory">제목</label>
 				<div class="custInfo">
-					<input type="text" name="title" id="title" value="${QnAview.qnaTitle}" readonly="readonly"/>
+					<input type="text" name="title" id="title" value="${result.qnaTitle}" readonly="readonly"/>
 				</div>
 				<p class="titleCheck"></p>
 			</div>
@@ -41,7 +41,7 @@
 				<label for="QnAcategory">상담유형</label>
 				<div class="selectWrap">
 					<select name="QnAcategory" id="QnAcategory">
-						<option value="${QnAview.qnaCategory}">${QnAview.qnaCategory}</option>
+						<option value="${result.qnaCategory}">${result.qnaCategory}</option>
 					</select>
 				</div>
 				<p class="optionCheck"></p>
@@ -49,39 +49,28 @@
 			<div class="row">
 				<label for="QnAcategory">내용</label>
 				<div>
-					<textarea name="content" id="content" class="QnAtextarea" readonly="readonly">${QnAview.qnaContent}</textarea>
+					<textarea name="content" id="content" class="QnAtextarea" readonly="readonly">${result.qnaContent}</textarea>
 				</div>
 				<p class="textareaCheck"></p>
 			</div>
 
 			<div class="title_line">
-				<h3>고객정보</h3>
+				<h3>답변</h3>
 			</div>
 
 			<div class="row">
-				<label for="QnAcategory">이메일</label>
-				<div class="custInfo">
-					<input type="text" name="email" id="email" value="${QnAview.email}" readonly="readonly"/>
-				</div>
-				<p class="emailCheck"></p>
-			</div>
-
-			<div class="row">
-				<label for="QnAcategory">문의 비밀번호
+				<label for="QnAcategory">답변 내용 *
 				</label>
 				<div class="custInfo">
-					<input type="password" name="pwd" id="pwd" maxlength="8" value="${QnAview.qnaPwd}" readonly="readonly" />
+					<textarea name="replyContent" id="replyContent" class="QnAtextarea"></textarea>
 				</div>
 				<p class="pwdCheck"></p>
 			</div>
 
 			<div class="formSubmit">
 				<span class="button_item">
-					<button type="button" onclick="open_win('HotelServlet?command=QnA_check&num=${QnAview.qnaNum}', 'delete')">삭제</button>
+					<button type="submit">확인</button>
 				</span> 
-				<span class="button_item">
-					<button type="button" onclick="open_win('HotelServlet?command=QnA_admin_check_form&num=${QnAview.qnaNum}', 'admin')">답글달기</button>
-				</span>
 			</div>
 		</form>
 	</div>

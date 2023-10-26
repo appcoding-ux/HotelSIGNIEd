@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <div class="header">
 	<a href="index.jsp"><img src="hotel_logo.png" alt="호텔로고사진"></a>
 
@@ -15,7 +14,6 @@
 	<div class="sertchWrap">
 		<div class="hotelSertch">
 			<form action="HotelServlet" name="frm" method="post">
-				<input type="hidden" name="command" value="search_room" />
 				<div class="hotelName">
 					<label for="name">호텔</label>
 					<div class="input">
@@ -28,7 +26,7 @@
 						<strong class="date_title">체크인</strong> <span class="date_day">10월24일</span>
 						<span class="date_month">(화)</span>
 					</div>
-					<span class="date_stay"> <span class="night"></span> 박
+					<span class="date_stay"> <span class="night">1</span> 박
 					</span>
 					<div class="date_col">
 						<strong class="date_title">체크아웃</strong> <span class="date_day">10월25일</span>
@@ -51,29 +49,13 @@
 					<a href="" title="레이어팝업" class="date_anchor"></a>
 				</div>
 				<div class="item_edit">
-					<button type="submit" class="sertchButton"
-						onclick="location.href='HotelServlet?command=search_room'">검색</button>
+					<button type="submit" class="sertchButton">검색</button>
 				</div>
 
 				<div class="dateInput">
 					<div>
-						<input type="hidden" id="input-id" name="input-id" placeholder="Enter ID">
-							<div id="result"></div>
+						<input type="hidden" id="input-id">
 					</div>
-					
-					<div class="datePerson">
-						어른
-						<!-- 어른의 수를 조절하는 input -->
-						<input type="button" value=" - " onclick="del('adultAmount');">
-						<input type="text" name="adultAmount" id="adultAmount" value="1" min="1" size="3" class="amounts">
-						<input type="button" value=" + " onclick="add('adultAmount');">
-						&nbsp;&nbsp;&nbsp; 어린이
-						<!-- 어린이의 수를 조절하는 input -->
-						<input type="button" value=" - " onclick="del('childAmount');">
-						<input type="text" name="childAmount" id="childAmount" value="0" size="3" class="amounts">
-						<input type="button" value=" + " onclick="add('childAmount');">
-					</div>
-					
 				</div>
 			</form>
 		</div>

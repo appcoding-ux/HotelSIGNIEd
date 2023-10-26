@@ -8,14 +8,11 @@
 </head>
 <body>
 	<script type="text/javascript">
-	if(window.name == "view"){
-		window.opener.parent.location.href = "HotelServlet?command=QnA_view&num=${param.num}";
-		
-	}else if (window.name = "delete"){
-		window.opener.parent.location.href = "HotelServlet?command=QnA_delete&num=${param.num}";
+	if (window.name = "admin"){
+		window.opener.parent.location.href = "HotelServlet?command=QnA_reply_form_admin&num=${param.num}";
 		
 	}
 	window.close();
-</script>
+	</script>
 </body>
 </html>

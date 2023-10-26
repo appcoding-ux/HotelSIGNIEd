@@ -1,5 +1,6 @@
 function open_win(url, name){
-	window.open(url, name, "width=500, height=300")
+	console.log(name);
+	window.open(url, name, "width=500, height=300");
 }
 
 function passCheck(){
