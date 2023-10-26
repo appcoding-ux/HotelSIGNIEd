@@ -12,7 +12,7 @@
 <script src="hotel-datepicker-main/dist/fecha.js"></script>
 <script src="hotel-datepicker-main/fecha-4.2.1/dist/fecha.min.js"></script>
 <script src="hotel-datepicker-main/dist/js/hotel-datepicker.js"></script>
-<script src="js/sertch.js"></script>
+<script src="js/search.js"></script>
 <script src="js/slide.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

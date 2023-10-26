@@ -9,10 +9,10 @@ $(function () {
         var dateInput = $('.dateInput');
         if (dateInput.css('top') === '80px' && dateInput.css('opacity') === '1') {
             // 현재 상태가 top: 80px이고 opacity: 1인 경우
-            dateInput.animate({ top: 40, opacity: 0 }, 600);
+            dateInput.stop().animate({ top: 40, opacity: 0 }, 600);
         } else {
             // 현재 상태가 top: 50px이고 opacity: 0인 경우
-            dateInput.animate({ top: 80, opacity: 1 }, 600);
+            dateInput.stop().animate({ top: 80, opacity: 1 }, 600);
         };
     });
 
