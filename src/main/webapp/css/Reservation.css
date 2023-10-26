@@ -1,8 +1,3 @@
-
-div {
-    text-align: center;
-}
-
 h2{
 	margin-bottom: 26px;
     font-size: 45px;
@@ -11,32 +6,61 @@ h2{
     margin-block-end: 0.67em;
     margin-inline-start: 0px;
     margin-inline-end: 0px;
+ }
+ .info-title{
+	 text-align: center;
+	 font-size: 45px;
+	 margin-top: 250px;
+ }
+ 
+h5{
+    font-size: 20px;
+    font-weight: lighter;
+    text-align: center;
+    margin-bottom:20px;
+}
 
+.col-box {
+	margin:0 auto;
+	width:720px;
+	margin : auto;
+
+	
+}
+.input-title {
+    margin-bottom: 10px; 
 }
 
 .reservationBox {
     color: #333;
     vertical-align: top;
     font-size: 16px;
-    text-align: center;
     font-weight: 400;
+    width: 30%; 
+    box-sizing: border-box;
+    height:50px;
+    padding: 10px;
 }
-button{
+
+.submitButton{
 	background-color: #ad9e87;
     color: #fff;
     font-size: 18px;
     line-height: 50px;
     border: 0;
     border-radius: 0;
-    width: 10%;
-    position: absolute;
-    left: 50%;
-    top: 50%;
     transform: translate(-50%, -50%);
+	margin-top: 20px;
 }
-button:hover { 
+.submitButton:hover { 
     background: #685f51; 
 }
-col-box{
-
+label {
+    font-weight: 400;
+    text-align: left;
+    margin: 0;
+    display: inline-block;
+    max-width: 100%;
+    cursor: default;
+    box-sizing: border-box;
 }

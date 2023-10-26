@@ -4,8 +4,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.signied.dao.ReservationVO;
-import com.signied.dto.ReservationDAO;
+import com.signied.dao.ReservationDAO;
+import com.signied.dto.ReservationVO;
 
 public class ReservationCheckAction implements Action {
 
@@ -21,7 +21,7 @@ public class ReservationCheckAction implements Action {
         System.out.println(vo);
         
         if (vo.getReserveNum() == Integer.parseInt(num)) {
-        	request.setAttribute("reservation", vo);
+           request.setAttribute("reservation", vo);
             url = "ReservationConfrim.jsp";
         } else {
             url = "index.jsp";
