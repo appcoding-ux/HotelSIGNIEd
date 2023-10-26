@@ -35,7 +35,15 @@ public class ActionFactory {
 			action = new HotelQnAadminCheckAction();
 		}else if(command.equals("QnA_reply_form_admin")) {
 			action = new HotelQnAReplyFormAction();
-		}
+		}else if(command.equals("people_num"))
+			action = new PeopleNumAction();
+		else if(command.equals("date_input"))
+			action = new DateInputAction();
+		else if(command.equals("search_room"))
+			action = new SearchRoomList();
+		else if(command.equals("get_date"))
+			action = new GetSystemDateAction();
+		
 		return action;
 	}
 }
