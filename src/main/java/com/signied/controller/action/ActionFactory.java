@@ -1,10 +1,9 @@
 package com.signied.controller.action;
 
+
 public class ActionFactory {
-	private ActionFactory() {
-	}
-	
-	public static ActionFactory instance = new ActionFactory();
+	private static ActionFactory instance = new ActionFactory();
+	private ActionFactory() {}
 	
 	public static ActionFactory getInstance() {
 		return instance;
@@ -25,6 +24,8 @@ public class ActionFactory {
 			action = new HotelQnACheckAction();
 		}else if(command.equals("QnA_view")) {
 			action = new HotelQnAViewAction();
+		}else if(command.equals("search_room")){}
+			action = new SearchRoomAction();
 		}
 		return action;
 	}
