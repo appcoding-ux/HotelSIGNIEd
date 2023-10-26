@@ -11,16 +11,19 @@ import javax.servlet.http.HttpServletResponse;
 import com.signied.controller.action.Action;
 import com.signied.controller.action.ActionFactory;
 
+
 @WebServlet("/HotelServlet")
 public class HotelServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Action action = null;
+		
+
 		String command = request.getParameter("command");
+		System.out.println("BoardServlet에서 요청을 받음을 확인 : " + command);
 		
 		ActionFactory af = ActionFactory.getInstance();
-		action = af.getAction(command);
+		Action action = af.getAction(command);
 		
 		if(action != null) {
 			try {
@@ -31,11 +34,11 @@ public class HotelServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
+
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		doGet(request, response);
 	}
-
 }
