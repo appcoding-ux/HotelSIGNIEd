@@ -15,13 +15,25 @@ $(function() {
 			dateInput.animate({ top: 80, opacity: 1 }, 600);
 		};
 	});
+	
+	//예약 가능 날짜 제한(현재 날짜 ~ 두달 후 까지)
+	var now = new Date();
+	var oneMonthLater = new Date(now.setMonth(now.getMonth() + 2));	// 두달 후
+	const year = oneMonthLater.getFullYear();
+	const month = ('0' + (oneMonthLater.getMonth() + 1)).slice(-2);
+	const day = ('0' + oneMonthLater.getDate()).slice(-2);
+	const dateStr = `${year}-${month}-${day}`;
+	console.log(dateStr);
 
+	
 	var input = document.getElementById('input-id');
 	var datepicker = new HotelDatepicker(input, {
+		endDate: dateStr,
 		inline: true,
 		showTopbar: false,
 		moveBothMonths: true,
 		minNights: 1,
+		maxNights:30,
 		startOfWeek: 'sunday',
 		selectForward: true,
 		format: 'YYYY-MM-DD',
