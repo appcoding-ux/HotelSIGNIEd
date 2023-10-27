@@ -27,7 +27,7 @@
 					<div class="date_col">
 						<strong class="date_title">체크인</strong> <span class="date_day"></span>
 					</div>
-					<span class="date_stay"> <span class="night"></span> 박
+					<span class="date_stay"> <span class="night">1 박</span> 
 					</span>
 					<div class="date_col">
 						<strong class="date_title">체크아웃</strong> <span class="date_day"></span>
