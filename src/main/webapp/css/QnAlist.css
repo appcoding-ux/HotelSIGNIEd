@@ -17,7 +17,7 @@ thead th {font-size:14px; font-weight:500; color:#9d9d9d; border-top:2px solid #
 
 .QnAlistTable {margin-top:5px;}
 
-/* 관리자 답글 달기 버튼 */
-.adminReply { height:20px;padding:0; text-align:right; border-bottom:1px solid #e2e2e2;}
-.adminReply > a {padding:0 15px 5px; font-size:14px; margin-bottom:5px;}
-.adminReply > a > i {rotate: 90deg;}
+/* 관리자 답변을 달았을 때 */
+.reply {color:#000; font-weight:400;}
+.replyComplete {text-decoration: underline; color:#000; font-weight:900; }
+.replyComplete > i {rotate: 90deg; margin-right:5px; color:cornflowerblue;}

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,16 +25,15 @@
 	<jsp:include page="header.jsp" />
 
 	<div class="QnAform">
-		<h3>
-			상담내용
-		</h3>
+		<h3>상담내용</h3>
 		<form action="HotelServlet" method="post" name="frm">
-			<input type="hidden" name="command" value="QnA_Reply" />
-			<input type="hidden" name="qnaNum" value="${param.num}"/>
+			<input type="hidden" name="command" value="QnA_Reply" /> <input
+				type="hidden" name="qnaNum" value="${param.num}" />
 			<div class="row">
 				<label for="QnAcategory">제목</label>
 				<div class="custInfo">
-					<input type="text" name="title" id="title" value="${result.qnaTitle}" readonly="readonly"/>
+					<input type="text" name="title" id="title"
+						value="${result.qnaTitle}" readonly="readonly" />
 				</div>
 				<p class="titleCheck"></p>
 			</div>
@@ -50,28 +49,24 @@
 			<div class="row">
 				<label for="QnAcategory">내용</label>
 				<div>
-					<textarea name="content" id="content" class="QnAtextarea" readonly="readonly">${result.qnaContent}</textarea>
+					<textarea name="content" id="content" class="QnAtextarea"
+						readonly="readonly">${result.qnaContent}</textarea>
 				</div>
 				<p class="textareaCheck"></p>
 			</div>
 
-			<div class="title_line">
-				<h3>답변</h3>
-			</div>
-
 			<div class="row">
-				<label for="QnAcategory">답변 내용 *
-				</label>
+				<label for="QnAcategory" style="color:green">답변 내용</label>
 				<div class="custInfo">
-					<textarea name="replyContent" id="replyContent" class="QnAtextarea"></textarea>
+					<textarea name="replyContent" id="replyContent" class="QnAtextarea" readonly="readonly">${QnAReply.replyContent}</textarea>
 				</div>
 				<p class="pwdCheck"></p>
 			</div>
 
 			<div class="formSubmit">
 				<span class="button_item">
-					<button type="submit">확인</button>
-				</span> 
+					<button type="button" onclick="location.href='HotelServlet?command=QnAList'">돌아가기</button>
+				</span>
 			</div>
 		</form>
 	</div>

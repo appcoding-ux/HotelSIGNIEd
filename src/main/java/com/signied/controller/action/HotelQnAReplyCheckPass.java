@@ -6,31 +6,30 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.signied.dao.QnADAO;
+import com.signied.dto.QnAReplyVO;
 import com.signied.dto.QnAVO;
 
-public class HotelQnAadminCheckAction implements Action {
+public class HotelQnAReplyCheckPass implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, Exception {
-		String url = null;
-		
+		int qnaNum = Integer.parseInt(request.getParameter("num"));
 		String pass = request.getParameter("pass");
-		int num = Integer.parseInt(request.getParameter("num"));
-		QnADAO dao = QnADAO.getInstance();
-		QnAVO vo = dao.selectOneByNum(num);
-		int replyCheck = dao.checkReply(num);
+		String url = "CheckAdminSuccess.jsp";
 		
-		if(pass.equals("admin")) {
-			System.out.println("도착은 했습니다.");
-			request.setAttribute("replyCheck", replyCheck);
-			url = "CheckAdminSuccess.jsp";
+		QnADAO dao = QnADAO.getInstance();
+		
+		QnAVO Qvo = dao.selectOneByNum(qnaNum);
+		
+		if(Qvo.getQnaPwd().equals(pass)) {
+			System.out.println("비밀번호는 맞는데 페이지 안넘어감");
+			url = "QnAReplyCheckSuccess.jsp";
 		}else {
-			url = "QnAadminCheckPass.jsp";
-			request.setAttribute("message", "비밀번호가 틀렸습니다.");
+			url = "QnAReplyCheck.jsp";
+			request.setAttribute("message", "비밀번호가 맞지 않습니다.");
 		}
 		
 		RequestDispatcher dis = request.getRequestDispatcher(url);
 		dis.forward(request, response);
 	}
-
 }

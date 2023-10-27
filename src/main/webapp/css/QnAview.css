@@ -31,7 +31,11 @@ h1,h3 {font-weight:500;}
 .button_item button {width:auto; min-width:160px; padding:0 20px; font-size:18px; line-height:50px;  transition: 0.7s;}
 .button_item:first-child button {color:#fff; background-color: #ad9e87; border:0;}
 .button_item:first-child button:hover {background-color:#685f51;}
+.button_item:nth-child(2) button {color:#fff; background-color:gray; border:0;}
+.button_item:nth-child(2) button:hover {background-color:#333;}
 .button_item:last-child button {color:#fff; background-color:#555; border:0;}
-.button_item:last-child button:hover {background-color:#333;}
+.button_item:last-child button:hover {background-color:#000;}
+
+
 
 

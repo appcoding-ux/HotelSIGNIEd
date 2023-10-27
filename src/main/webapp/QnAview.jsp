@@ -82,6 +82,9 @@
 				<span class="button_item">
 					<button type="button" onclick="open_win('HotelServlet?command=QnA_admin_check_form&num=${QnAview.qnaNum}', 'admin')">답글달기</button>
 				</span>
+				<span class="button_item">
+					<button type="button" onclick="location.href='HotelServlet?command=QnAList'">취소</button>
+				</span>
 			</div>
 		</form>
 	</div>
