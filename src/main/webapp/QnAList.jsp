@@ -77,6 +77,21 @@
 								pattern="yyyy-MM-dd" /> <fmt:formatDate value="${date}"
 								pattern="yyyy-MM-dd" /></td>
 					</tr>
+					<c:forEach var="ReplyList" items="${ReplyList}">
+						<c:if test="${QnAlist.qnaNum == ReplyList.qnaNum}">
+							<tr>
+								<td></td>
+								<td><i class="fa-solid fa-lock"></i></td>
+								<td></td>
+								<td><a href=""
+									onclick="open_win('HotelServlet?command=QnA_reply_check_form&num=${ReplyList.qnaNum}', 'replyView')" class="reply"><span class="replyComplete" ><i class="fa-solid fa-arrow-turn-up"></i>답변완료</span>  답변드립니다.</a></td>
+								<td>관리자</td>
+								<td><fmt:parseDate value="${ReplyList.replyRegidate}"
+										var="date" pattern="yyyy-MM-dd" /> <fmt:formatDate
+										value="${date}" pattern="yyyy-MM-dd" /></td>
+							</tr>
+						</c:if>
+					</c:forEach>
 				</c:forEach>
 			</table>
 		</div>

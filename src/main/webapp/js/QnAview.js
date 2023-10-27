@@ -1,5 +1,4 @@
 function open_win(url, name){
-	console.log(name);
 	window.open(url, name, "width=500, height=300");
 }
 

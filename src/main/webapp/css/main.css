@@ -9,8 +9,8 @@ ul,li,ol {list-style: none; margin:0; padding:0;}
 #wrap {width:auto; height:auto; position:relative;}
 
 /* 헤더 => 예약, 조회, QnA */
-.header {height:85px; width:100%; min-height:85px; margin:0 auto;background-color: rgba(255,255,255,.93); position:fixed; top:0; z-index:100;}
-.header > a {display: inline-block; width:200px; height:100%; float:left}
+.header {height:85px; width:100%; min-height:85px; margin:0 auto;background-color: rgba(255,255,255,.93); position:fixed; top:0; z-index:100; border-bottom:1px solid #dcdcdc;}
+.header > a {display: inline-block; width:200px; height:100%;}
 .header > a > img {width:100%; height:100%; margin-left:100px;}
 .header > nav {float:right; width:65%; height:100%;}
 .header > nav > ul {width:100%;}

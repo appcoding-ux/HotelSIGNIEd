@@ -6,28 +6,24 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.signied.dao.QnADAO;
+import com.signied.dto.QnAReplyVO;
 import com.signied.dto.QnAVO;
 
-public class HotelQnAadminCheckAction implements Action {
+public class HotelQnAReplyViewAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, Exception {
-		String url = null;
+		int qnaNum = Integer.parseInt(request.getParameter("num"));
 		
-		String pass = request.getParameter("pass");
-		int num = Integer.parseInt(request.getParameter("num"));
 		QnADAO dao = QnADAO.getInstance();
-		QnAVO vo = dao.selectOneByNum(num);
+
+		QnAVO Qvo = dao.selectOneByNum(qnaNum);
+		QnAReplyVO Avo = dao.selectOneByReply(qnaNum);
 		
-		if(pass.equals("admin")) {
-			url = "CheckAdminSuccess.jsp";
-		}else {
-			url = "QnAadminCheckPass.jsp";
-			request.setAttribute("message", "비밀번호가 틀렸습니다.");
-		}
+		request.setAttribute("result", Qvo);
+		request.setAttribute("QnAReply", Avo);
 		
-		RequestDispatcher dis = request.getRequestDispatcher(url);
+		RequestDispatcher dis = request.getRequestDispatcher("QnAReplyView.jsp");
 		dis.forward(request, response);
 	}
-
 }
