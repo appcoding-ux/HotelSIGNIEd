@@ -85,7 +85,7 @@
 
 				<div class="formSubmit">
 					<span class="button_item"><button type="submit" onclick="return QnACheck()">확인</button></span>
-					<span class="button_item"><button type="reset">취소</button></span>
+					<span class="button_item"><button type="button" onclick="location.href='HotelServlet?command=QnAList'">취소</button></span>
 				</div>
 			</form>
 		</div>

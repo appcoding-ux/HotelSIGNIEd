@@ -22,7 +22,6 @@ public class HotelQnAReplyCheckPass implements Action {
 		QnAVO Qvo = dao.selectOneByNum(qnaNum);
 		
 		if(Qvo.getQnaPwd().equals(pass)) {
-			System.out.println("비밀번호는 맞는데 페이지 안넘어감");
 			url = "QnAReplyCheckSuccess.jsp";
 		}else {
 			url = "QnAReplyCheck.jsp";

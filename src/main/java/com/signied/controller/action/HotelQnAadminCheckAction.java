@@ -21,7 +21,6 @@ public class HotelQnAadminCheckAction implements Action {
 		int replyCheck = dao.checkReply(num);
 		
 		if(pass.equals("admin")) {
-			System.out.println("도착은 했습니다.");
 			request.setAttribute("replyCheck", replyCheck);
 			url = "CheckAdminSuccess.jsp";
 		}else {

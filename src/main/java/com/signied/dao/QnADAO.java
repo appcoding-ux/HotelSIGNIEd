@@ -44,18 +44,27 @@ public class QnADAO {
 		
 		return result;
 	}
-
-	public List<QnAVO> getAllQnAList() {
+	
+	
+	public List<QnAVO> getAllQnAList(int pageNum, int amount) {
 		List<QnAVO> list = new ArrayList<>();
 		QnAVO vo = null;
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String sql = "select * from qna order by qnanum desc";
+		String sql = "select  *\r\n"
+				+ "from ( select rownum rn,\r\n"
+				+ 				"A.*\r\n"
+				+ 		"from ( select * \r\n"
+				+ 				"from qna\r\n "
+				+ 					"order by qnanum desc) A )\r\n"
+				+ "where rn > ? and  rn <= ?";
 		
 		try {
 			con = DBManager.getConnection();
 			ps = con.prepareStatement(sql);
+			ps.setInt(1, (pageNum - 1) * amount);
+			ps.setInt(2, pageNum * amount);
 			
 			rs = ps.executeQuery();
 			while(rs.next()) {
@@ -241,5 +250,28 @@ public class QnADAO {
 		return vo;
 	}
 	
-	
+	public int getQnACount() {
+		int result = 0;
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String sql = "select count(*) as count from qna";
+		
+		try {
+			con = DBManager.getConnection();
+			ps = con.prepareStatement(sql);
+			
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				result = rs.getInt("count");
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBManager.close(con, ps, rs);
+		}
+		
+		return result;
+	}
 }
