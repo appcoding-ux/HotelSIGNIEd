@@ -14,8 +14,8 @@
 
 	<div class="sertchWrap">
 		<div class="hotelSertch">
-			<form action="HotelServlet" name="frm" method="post">
-				<input type="hidden" name="command" value="search_room" />
+			<form action="HotelServlet" name="frm" method="post" id="myForm">
+				<input type="hidden" name="command" value="search_room" class="command"/>
 				<div class="hotelName">
 					<label for="name">호텔</label>
 					<div class="input">
@@ -26,8 +26,6 @@
 				<div class="hotelCheckinAndCheckout">
 					<div class="date_col">
 						<strong class="date_title">체크인</strong> <span class="date_day"></span>
-						<input type="hidden" name="date_day" value="${dateIn}"/>
-						<input type="hidden" name="date_day2" value="${dateIn2}"/>
 					</div>
 					<span class="date_stay"> <span class="night">1 박</span> 
 					</span>
@@ -51,7 +49,7 @@
 					<a href="" title="레이어팝업" class="date_anchor"></a>
 				</div>
 				<div class="item_edit">
-					<button type="submit" class="sertchButton">검색</button>
+					<button type="submit" class="sertchButton" onclick="amountCount()">검색</button>
 				</div>
 
 				<div class="dateInput">
