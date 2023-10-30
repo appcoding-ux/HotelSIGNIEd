@@ -21,3 +21,11 @@ thead th {font-size:14px; font-weight:500; color:#9d9d9d; border-top:2px solid #
 .reply {color:#000; font-weight:400;}
 .replyComplete {text-decoration: underline; color:#000; font-weight:900; }
 .replyComplete > i {rotate: 90deg; margin-right:5px; color:cornflowerblue;}
+
+/*  페이징 버튼 */
+.pageButton {margin:40px 0; text-align: center; width:100%; height:auto; overflow:hidden; line-height:30px;}
+.pageButton > ul {height:17px; text-align: center; vertical-align: top; margin-bottom:50px;}
+.pageButton > ul li {display: inline-block;}
+.pageButton > ul li a {font-weight: bold; color:#000; overflow: hidden; cursor: pointer; font-size:17px; padding:0 1px;}
+
+.active {border-bottom:1px solid #000;}

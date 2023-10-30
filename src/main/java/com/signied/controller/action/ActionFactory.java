@@ -43,13 +43,13 @@ public class ActionFactory {
 			action = new SearchRoomList();
 		else if(command.equals("get_date"))
 			action = new GetSystemDateAction();
-		else if(command.equals("QnA_Reply")) 
+		else if(command.equals("QnA_Reply")) {
 			action = new HotelQnAReplyAction();
-		else if(command.equals("QnA_reply_check_form")) 
+		}else if(command.equals("QnA_reply_check_form")) {
 			action = new HotelQnAReplyCheckForm();
-		else if(command.equals("QnA_reply_check_pass")) 
+		}else if(command.equals("QnA_reply_check_pass")) {
 			action = new HotelQnAReplyCheckPass();
-		else if(command.equals("QnA_reply_view")) 
+		}else if(command.equals("QnA_reply_view")) {
 			action = new HotelQnAReplyViewAction();
 		else if(command.equals("room_reservation")) 
 			action = new RoomReservation();

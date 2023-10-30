@@ -70,7 +70,7 @@
 
 			<div class="formSubmit">
 				<span class="button_item">
-					<button type="submit">확인</button>
+					<button type="submit" onclick="return replyCheck()">확인</button>
 				</span> 
 			</div>
 		</form>

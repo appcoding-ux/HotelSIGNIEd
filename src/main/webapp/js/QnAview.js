@@ -9,3 +9,12 @@ function passCheck(){
 	}	
 	return true;
 }
+
+function replyCheck(){
+	if($('#replyContent').val() == ""){
+		alert("답글은 무조건 입력해야합니다.");
+		$('#replyContent').focus();
+		return false;
+	}
+	return true;
+}

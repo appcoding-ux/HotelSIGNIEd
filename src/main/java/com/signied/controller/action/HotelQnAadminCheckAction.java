@@ -18,8 +18,10 @@ public class HotelQnAadminCheckAction implements Action {
 		int num = Integer.parseInt(request.getParameter("num"));
 		QnADAO dao = QnADAO.getInstance();
 		QnAVO vo = dao.selectOneByNum(num);
+		int replyCheck = dao.checkReply(num);
 		
 		if(pass.equals("admin")) {
+			request.setAttribute("replyCheck", replyCheck);
 			url = "CheckAdminSuccess.jsp";
 		}else {
 			url = "QnAadminCheckPass.jsp";

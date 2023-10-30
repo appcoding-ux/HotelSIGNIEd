@@ -8,7 +8,7 @@
 </head>
 <body>
 	<script type="text/javascript">
-	if (window.name == 'admin'){
+	if (window.name == "admin"){
 		if(${replyCheck} == 1){
 			alert("이미 답변을 입력했습니다.");
 			window.opener.parent.location.href = "HotelServlet?command=QnA_view&num=${param.num}";
@@ -17,6 +17,6 @@
 		}
 	}
 	window.close();
-	</script>	
+	</script>
 </body>
 </html>

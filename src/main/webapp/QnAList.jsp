@@ -84,7 +84,9 @@
 								<td><i class="fa-solid fa-lock"></i></td>
 								<td></td>
 								<td><a href=""
-									onclick="open_win('HotelServlet?command=QnA_reply_check_form&num=${ReplyList.qnaNum}', 'replyView')" class="reply"><span class="replyComplete" ><i class="fa-solid fa-arrow-turn-up"></i>답변완료</span>  답변드립니다.</a></td>
+									onclick="open_win('HotelServlet?command=QnA_reply_check_form&num=${ReplyList.qnaNum}', 'replyView')"
+									class="reply"><span class="replyComplete"><i
+											class="fa-solid fa-arrow-turn-up"></i>답변완료</span> 답변드립니다.</a></td>
 								<td>관리자</td>
 								<td><fmt:parseDate value="${ReplyList.replyRegidate}"
 										var="date" pattern="yyyy-MM-dd" /> <fmt:formatDate
@@ -94,6 +96,22 @@
 					</c:forEach>
 				</c:forEach>
 			</table>
+		</div>
+
+		<div class="pageButton">
+			<ul>
+				<c:if test="${pageVO.prev}">
+					<li><a href="HotelServlet?command=QnAList&pageNum=${pageVO.startPage -1 }&amount=${pageVO.amount}">이전</a></li>
+				</c:if>
+				<c:forEach var="num" begin="${pageVO.startPage}" end="${pageVO.endPage}">
+					<li ><a
+						href="HotelServlet?command=QnAList&pageNum=${num}&amount=${pageVO.amount}" class="${pageVO.pageNum eq num ? 'active' : '' }">${num}</a>
+					</li>
+				</c:forEach>
+				<c:if test="${pageVO.next}">
+					<li><a href="HotelServlet?command=QnAList&pageNum=${pageVO.startPage + 1}&amount=${pageVO.amount}">다음</a></li>
+				</c:if>
+			</ul>
 		</div>
 
 		<div class="writeBtn">
