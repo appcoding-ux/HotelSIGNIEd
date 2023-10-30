@@ -1,0 +1,129 @@
+h2{
+	margin-bottom: 26px;
+    font-size: 45px;
+    text-align: center;
+    margin-block-start: 0.67em;
+    margin-block-end: 0.67em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+ }
+ .info-title{
+	 text-align: center;
+	 font-size: 45px;
+	 margin-top: 250px;
+ }
+ 
+h5{
+    font-size: 20px;
+    font-weight: lighter;
+    text-align: center;
+    margin-bottom:20px;
+}
+
+.col-box {
+	margin:0 auto;
+	width:720px;
+	margin-bottom: 10px;
+	margin-top: 100px;
+	
+	
+}
+.center{
+	display:flex;
+	align-items: center;
+	justify-content:center;
+}
+.input-title {
+	font-size: 20px;
+    margin-bottom: 10px; 
+    font-weight: bold;
+}
+
+.reservationBox {
+    color: #333;
+    vertical-align: top;
+    font-size: 16px;
+    font-weight: 400;
+    width: 100%; 
+    box-sizing: border-box;
+    height:50px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+.inquiry-hr{
+	margin: 40px 0px;
+}
+.submitButton{
+	background-color: #ad9e87;
+	width: 360px;
+    color: #fff;
+    font-size: 18px;
+    line-height: 50px;
+    border: 0;
+    border-radius: 0;
+	margin-top: 80px;
+	text-align: center;
+	margin:0 auto;
+	display: block;
+	cursor: pointer;
+}
+.submitButton:hover { 
+    background: #685f51; 
+}
+.alert-message{
+	margin-bottom: 20px;
+	color: red;
+}
+label {
+    font-weight: 400;
+    text-align: left;
+    margin: 0;
+    display: inline-block;
+    max-width: 100%;
+    cursor: default;
+    box-sizing: border-box;
+}
+body{
+	overflow: auto
+
+}
+.txt-area{
+    font-size: 18px;
+    padding: 24px;
+    border-bottom: 1px solid #dcdcdc;
+	
+}
+li{
+	margin-bottom: 40px;
+	text-align: right;
+	
+}
+.type f-bold{
+	text-align: left;
+	
+}
+.info htlAndRms .info{
+	text-align: right;
+    padding-left: 20px;
+    width: 76%;
+}
+.totalprice{
+	text-align: right;
+}
+.total-price{
+	text-align: center;
+    font-size: 26px;
+}
+.total-number{
+	margin-left: 300px;
+    font-size: 26px;
+}
+.reservation-title{
+	font-size: 22px;
+	margin-top: 100px;
+	text-align: center;
+}
+img{
+	width: 40%;
+	margin-top: 20px;   
+}
