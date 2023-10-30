@@ -53,6 +53,9 @@ public class ActionFactory {
 			action = new HotelQnAReplyViewAction();
 		else if(command.equals("Reservation_save")) 
 			action = new ReservationSaveAction();
+		else if(command.equals("Reservation_num")) 
+			action = new ReservationNumAction();
+		
 		
 		return action;
 	}

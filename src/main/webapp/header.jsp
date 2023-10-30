@@ -7,7 +7,7 @@
 	<nav>
 		<ul>
 			<li class="sertchClick"><a href="">객실예약</a></li>
-			<li><a href="">예약조회</a></li>
+			<li><a href="ReservationInquiry.jsp">예약조회</a></li>
 			<li><a href="HotelServlet?command=QnAList&pageNum=1">QnA</a></li>
 		</ul>
 	</nav>
