@@ -82,17 +82,31 @@ ul,li,ol {list-style: none; margin:0; padding:0;}
 
 
 /* 검색 결과 > 상세검색 */
-.searchList { margin:30px auto 0; border-bottom:1px solid rgb(174, 141, 117, 0.5); width:100%; padding:18px 20px; height:72px;	}
+.searchList { margin:30px auto 0; border-bottom:1px solid rgb(174, 141, 117, 0.5); width:100%; padding:18px 20px; height:72px;   }
 .searchListImg {margin-left:100px;} 
 .searchListImg > a {display:block; width:120px; height:72px;}
 .searchListImg > a > img {float:left;}
 .searchListP {float:left; line-height:37px; margin-left: 20px;}
 
 /* 검색한 객실 */
-.roomList {margin:50px auto 0;	}
+.roomList {margin:50px auto 0;   }
+.record {width:1320px; height:256px; margin:0 auto 40px;}
+.roomImg {width:448px; height:256px; float:left;}
+.roomImg > img {width:100%; height:100%;}
 
-/* 상세검색 필터 */
-.background {position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background-color: rgba(0, 0, 0, 0.3); z-index: 1000;
+.room_info {float:right; height:100%; width:800px; margin-top:20;}
+/* 디테일 검색 */
+
+
+/*       --------------------------             */
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 1000;
   
   /* 숨기기 */
   z-index: -1;

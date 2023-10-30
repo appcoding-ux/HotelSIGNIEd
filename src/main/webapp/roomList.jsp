@@ -146,18 +146,90 @@
       </div>
    </div>
    
-   <div class="background">
-      <div class="detailSearch">
-         <header>
-            <h2>객실 필터</h2>
-         </header>
-         
-         <div class="detail_body">
-            
-         </div>
-         
-         <button type="button" class="closeButton" onclick="closeButton('.background')"><i class="fa-solid fa-xmark"></i></button>
-      </div>
-   </div>
+  <div class="background">
+		<div class="detailSearch">
+			
+			<!-- modal : 팝업창, 일단 modal창 크게 wrap 하는 코드  -->
+			<div class = "detailSearch-modal-wrap" role="document">
+			
+				<!-- header : 객실 필터 div title로 객실 필터, 창을 닫는 x버튼을 우측 상단에 만들어서 css값이 리셋이 될 수 있도록 작성 -->
+				<header class="detailSearch-modal-head">
+					<h2 class="detailSearch-modal-title">객실필터</h2>
+					<!-- ??? 닫기버튼 어떻게 -->
+					<button type="button" class="closeButton" onclick="closeButton('.background')"><i class="fa-solid fa-xmark"></i></button> 
+				</header>
+				
+				<div class = "detailSerach-modal-body">
+				<!-- body영역 정렬 기준 : 낮은 가격순, 높은 가격순 = 가격을 가져와서 asc, desc 하는 정렬 sql구문을 사용해서 정렬해준다.
+						오름 차순 : ASC 내림차순 : DESC -->
+					<div class = "column-group">
+						<div class ="column">
+							<p class = "title">정렬기준</p>
+							<div class = "price-btn-area">
+								<div class = "price-btn">
+									<input type="radio" id="radio-box01" name="fee" value="asc" checked="checked">
+									<label for="radio-box01" class="">낮은 가격 순</label>
+								</div>
+							</div>
+							<div class="price-btn">
+                            	<input type="radio" id="radio-box02" name="fee" value="desc">
+                				<label for="radio-box02" class="">높은 가격 순</label>
+                    		</div>
+						</div>
+						
+						
+					<div class = "column">
+				<!-- 뷰타입 : 오션, 시티, 하버
+					= viewtype을 select해서 DB에서 조건에 맞는 내용을 가져와서 [???]값에 저장  -->
+						<p class = "title">뷰타입</p>
+						<div class = "view-btn-area">
+							<div class = "view-btn">
+								<input type ="checkbox" id="check-box01" name="view" >
+								<label for="radio-box01" class="">시티뷰</label>
+							</div>
+							<div class = "view-btn">
+								<input type ="checkbox" id="check-box02" name="view" >
+								<label for="radio-box02" class="">오션뷰</label>
+							</div>
+							<div class = "view-btn">
+								<input type ="checkbox" id="check-box03" name="view" >
+								<label for="radio-box03" class="">하버뷰</label>
+							</div>
+						</div>
+					</div>
+				
+					<div class = "column">
+						<p class = "title">침대 타입</p> <!-- 근데 이거 다중선택하게 어떻게 함? -->
+							<div class = "room-btn-area">
+								<div class = "room-btn">
+									<input type = "checkbox" id = "check-box01" name="room">
+									<label for="radio-box01" class="">더블</label>
+								</div>
+								<div class = "room-btn">
+									<input type = "checkbox" id = "check-box02" name="room">
+									<label for="radio-box02" class="">트윈</label>
+								</div>
+								<div class = "room-btn">
+									<input type = "checkbox" id = "check-box03" name="room">
+									<label for="radio-box03" class="">패밀리</label>
+								</div>
+							</div>
+					</div>
+				</div>
+				<br>
+				<div class = "detailSerach-modal-foot">
+					<a href="#none" role="button" class="reset-btn" onclick="">
+						<span>초기화</span>
+					</a>
+					<a href="#none" role="button" class="confirm-btn" onclick="closeButton('.background')">
+						<span>검색</span>
+					</a>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+</div>
+
 </body>
 </html>

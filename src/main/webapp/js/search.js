@@ -172,6 +172,8 @@ function amountCount(){
    $('.command').append("<input type='hidden' value='" + date1 + "' name='checkIn' />");
    $('.command').append("<input type='hidden' value='" + date2 + "' name='checkOut' />");
    $('.command').append("<input type='hidden' value='" + bak + "' name='bak' />");
+   $('.command').append("<input type='hidden' value='" + dateIn + "' name='originCheckIn' />");
+   $('.command').append("<input type='hidden' value='" + dateIn2 + "' name='originCheckOut' />");
 }
 
 //default date 입력
