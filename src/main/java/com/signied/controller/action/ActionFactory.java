@@ -51,6 +51,8 @@ public class ActionFactory {
 			action = new HotelQnAReplyCheckPass();
 		else if(command.equals("QnA_reply_view")) 
 			action = new HotelQnAReplyViewAction();
+		else if(command.equals("room_reservation")) 
+			action = new RoomReservation();
 		
 		return action;
 	}

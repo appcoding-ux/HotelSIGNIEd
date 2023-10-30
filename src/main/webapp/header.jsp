@@ -26,6 +26,8 @@
 				<div class="hotelCheckinAndCheckout">
 					<div class="date_col">
 						<strong class="date_title">체크인</strong> <span class="date_day"></span>
+						<input type="hidden" name="date_day" value="${dateIn}"/>
+						<input type="hidden" name="date_day2" value="${dateIn2}"/>
 					</div>
 					<span class="date_stay"> <span class="night">1 박</span> 
 					</span>

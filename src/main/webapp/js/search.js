@@ -175,3 +175,8 @@ $(function() {
         }
     });
 });
+function submitForm(roomNum) {
+    var form = document.getElementById("myForm");
+    form.action = "HotelServlet?command=room_reservation&num=" + roomNum;
+    form.submit();
+}

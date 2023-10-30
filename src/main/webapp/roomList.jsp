@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,8 +35,11 @@
 			</nav>
 			<div class="sertchWrap">
 				<div class="hotelSertch">
-					<form action="HotelServlet" name="frm" method="post">
+					<form action="HotelServlet" name="frm" method="post" id="myForm">
 						<input type="hidden" name="command" value="search_room" />
+						<input type="hidden" name="checkIn" value="${dateIn}" />
+						<input type="hidden" name="checkOut" value="${dateIn2}" />
+						
 						<div class="hotelName">
 							<label for="name">호텔</label>
 							<div class="input">
@@ -45,12 +49,12 @@
 						</div>
 						<div class="hotelCheckinAndCheckout">
 							<div class="date_col">
-								<strong class="date_title">체크인</strong> <span class="date_day"></span>
+								<strong class="date_title">체크인</strong> <span class="date_day">${dateIn}</span>
 							</div>
-							<span class="date_stay"> <span class="night"></span> 박
+							<span class="date_stay"> <span class="night"></span>
 							</span>
 							<div class="date_col">
-								<strong class="date_title">체크아웃</strong> <span class="date_day"></span>
+								<strong class="date_title">체크아웃</strong> <span class="date_day">${dateIn2}</span>
 							</div>
 
 							<a href="" title="레이어팝업" class="date_anchor"></a>
@@ -134,6 +138,8 @@
 							href="HotelServlet?command=room_list&num=${room.roomNum}">${room.roomName}</a></td>
 						<td>| 전망 ${room.viewType} | 최대인원수 ${room.roomCapacity}</td>
 						<td>침대타입 ${room.roomType}</td>
+						<td> <fmt:formatNumber type="currency" value="${room.roomPrice}" currencySymbol="￦" /></td>
+						<td><button type="submit" form="myForm" onclick="submitForm(${room.roomNum})">예약하기</button></td>
 					</tr>
 				</c:forEach>
 			</table>

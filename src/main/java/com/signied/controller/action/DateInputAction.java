@@ -2,6 +2,7 @@ package com.signied.controller.action;
 
 import java.text.SimpleDateFormat;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -39,6 +40,7 @@ public class DateInputAction implements Action {
 	      }
 	      System.out.println(dateView);
 	      System.out.println(dateView2);
+	      
 	      String bak = request.getParameter("bak"); // night 박을 출력(통째로)
 //	      String bak = request.getParameter("bak").substring(0,1); 잘라서 박만 출력하는 코드
 	      System.out.println(bak);
@@ -63,5 +65,10 @@ public class DateInputAction implements Action {
 	       
 	       response.getWriter().write(result.toString());
 	      
+	       request.setAttribute("dateIn", dateIn);
+	       request.setAttribute("dateIn2", dateIn2);
+	       
+	       
+
 	   }
 }

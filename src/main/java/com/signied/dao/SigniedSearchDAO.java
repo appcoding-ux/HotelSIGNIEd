@@ -21,7 +21,7 @@ public class SigniedSearchDAO{
 	public List<RoomVO> searchRoom(String date, int totalAmount) throws SQLException {
 		
 		List<RoomVO> list = new ArrayList<RoomVO>();
-		String sql = "select * from room where inventory >= ?";
+		String sql = "select * from room where ROOMCAPACITY >= ?";
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -42,10 +42,11 @@ public class SigniedSearchDAO{
 				vo.setViewType(rs.getString("viewType"));
 				vo.setInventory(rs.getInt("inventory"));
 				vo.setRoomCapacity(rs.getInt("roomCapacity"));
+				vo.setRoomPrice(rs.getInt("roomPrice")); 
 				vo.setImg(rs.getString("img"));
 				
 				list.add(vo);
-				System.out.println("검색한 room list : " + vo);
+//				System.out.println("검색한 room list : " + vo);
 			}
 			
 			
