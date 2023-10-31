@@ -27,7 +27,6 @@ public class SearchRoomList implements Action {
 		request.setAttribute("child", request.getParameter("childCount"));
 		request.setAttribute("checkIn", request.getParameter("checkIn"));
 		request.setAttribute("checkOut", request.getParameter("checkOut"));
-
 		int totalAmount = Integer.parseInt(request.getParameter("adultAmount"))
 				+ Integer.parseInt(request.getParameter("childAmount"));
 
