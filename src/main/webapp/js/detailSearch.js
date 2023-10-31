@@ -1,3 +1,6 @@
+var dateIn = "";
+var dateIn2 = "";
+
 $(function() {
 	$("#show").click(function(e) {
 		e.preventDefault();
@@ -41,6 +44,10 @@ function closeButton(e) {
 	if ($(e.target).hasClass('background'))  // Check if the click was on the .background element
 		$('.detailSearch').stop().hide(300);
 	$(".background").removeClass(" show"); // Add the "show" class back
+}
+
+function resetButton(){
+	$('.type_label').css({ backgroundColor: "#fff", color: "#333" });
 }
 
 $(function() {
@@ -202,24 +209,22 @@ $(function() {
 	});
 })
 
-function amountCount(){
+function amountCount() {
 	var amountView = $('.person_num').eq(1).text();
-   var amountView2 = $('.person_num').eq(2).text();
-   var date1 = $('.date_day').eq(0).text();
-   var date2 = $('.date_day').eq(1).text();
-   var bak = $('.night').text();
-   var roomNum = $('#roomNum').val();
+	var amountView2 = $('.person_num').eq(2).text();
+	var date1 = $('.date_day').eq(0).text();
+	var date2 = $('.date_day').eq(1).text();
+	var bak = $('.night').text();
 
-
-   $('.command').append("<input type='hidden' value='" + amountView + "' name='adultCount' />");
-   $('.command').append("<input type='hidden' value='" + amountView2 + "' name='childCount' />");
-   $('.command').append("<input type='hidden' value='" + date1 + "' name='checkIn' />");
-   $('.command').append("<input type='hidden' value='" + date2 + "' name='checkOut' />");
-   $('.command').append("<input type='hidden' value='" + bak + "' name='bak' />");
-   $('.command').append("<input type='hidden' value='" + roomNum + "' name='roomNum' />");
+	$('.command').append("<input type='hidden' value='" + amountView + "' name='adultCount' />");
+	$('.command').append("<input type='hidden' value='" + amountView2 + "' name='childCount' />");
+	$('.command').append("<input type='hidden' value='" + date1 + "' name='checkIn' />");
+	$('.command').append("<input type='hidden' value='" + date2 + "' name='checkOut' />");
+	$('.command').append("<input type='hidden' value='" + bak + "' name='bak' />");
+	$('.command').append("<input type='hidden' value='" + dateIn + "' name='originCheckIn' />");
+	$('.command').append("<input type='hidden' value='" + dateIn2 + "' name='originCheckout' />");
 }
 
 function submitForm() {
-		amountCount();
-        document.getElementById('form').submit();
-    }
+	amountCount();
+}

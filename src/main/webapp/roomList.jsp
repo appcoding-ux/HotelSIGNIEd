@@ -38,7 +38,7 @@
 			<div class="sertchWrap">
 				<div class="hotelSertch">
 					<form action="HotelServlet" name="frm" method="post" id="myForm">
-						<input type="hidden" name="command" value="room_reservation"
+						<input type="hidden" name="command" value="search_room"
 							class="command" />
 						<div class="hotelName">
 							<label for="name">호텔</label>
@@ -75,7 +75,7 @@
 							<a href="" title="레이어팝업" class="date_anchor"></a>
 						</div>
 						<div class="item_edit">
-							<button type="submit" class="sertchButton" onclick="">수
+							<button type="submit" class="sertchButton" onclick="amountCount()">수
 								정</button>
 						</div>
 
@@ -110,15 +110,11 @@
 
 		<!-- 10/27 href 이동은 페이지가 만들어지고 수정 -->
 		<div class="stepProcess">
-			<div class="process_col">
-				<span class="on_text">1) 객실선택</span>
-			</div>
-			<div class="process_col">
-				<span class="off_text">——— 2) 옵션선택</span>
-			</div>
-			<div class="process_col">
-				<span class="off_text">——— 3) 예약정보 입력</span>
-			</div>
+			<ul class="process_col">
+				<li class="list_first"><a href="#">호텔 선택</a></li>
+				<li class="list_second"><a href="#">객실 선택</a></li>
+				<li class="list_third"><a href="#">예약정보 입력</a></li>
+			</ul>
 		</div>
 
 		<div class="searchList">
@@ -130,25 +126,36 @@
 		</div>
 
 		<div class="roomList">
-			<table>
-				<c:forEach var="room" items="${roomList }">
-					<input type="hidden" name="roomNum" value="${room.roomNum}"
-						id="roomNum" />
-					<tr class="record">
-						<td><img src="${room.img}" width="560" height="320" /></td>
-						<td><a
-							href="HotelServlet?command=room_list&num=${room.roomNum}">${room.roomName}</a></td>
-						<td>| 전망 ${room.viewType} | 최대인원수 ${room.roomCapacity}</td>
-						<td>침대타입 ${room.roomType}</td>
-						<td><fmt:formatNumber type="currency"
-								value="${room.roomPrice}" currencySymbol="￦" /></td>
-						<td><button type="submit" form="myForm"
-								onclick="submitForm()">예약하기</button></td>
-						<td>
-					</tr>
-				</c:forEach>
-			</table>
-		</div>
+         <form action="HotelServlet" name="frm" method="post">
+            <input type="hidden" name="command" value="Reservation_save" />
+            <input type="hidden" name="bak" value="${bak}" />
+            <input type="hidden" name="originCheckIn" value="${originCheckIn}" />
+            <input type="hidden" name="originCheckout" value="${originCheckOut}" />
+            <input type="hidden" name="checkIn" value="${checkIn}" />
+            <input type="hidden" name="checkOut" value="${checkOut}" />
+            <input type="hidden" name="adultAmount" value="${adult}" />
+            <input type="hidden" name="childAmount" value="${child}" />
+                  
+            <table>
+               <c:forEach var="room" items="${roomList }">
+                  <input type="hidden" name="roomNum" value="${room.roomNum}"
+                     id="roomNum" />
+                     
+                  <tr class="record">
+                     <td><img src="${room.img}" width="560" height="320" /></td>
+                     <td><a
+                        href="HotelServlet?command=room_list&num=${room.roomNum}">${room.roomName}</a></td>
+                     <td>| 전망 ${room.viewType} | 최대인원수 ${room.roomCapacity}</td>
+                     <td>침대타입 ${room.roomType}</td>
+                     <td><fmt:formatNumber type="currency"
+                           value="${room.roomPrice}" currencySymbol="￦" /></td>
+                     <td><button type="submit">예약하기</button></td>
+                     <td>
+                  </tr>
+               </c:forEach>
+            </table>
+         </form>
+      </div>
 	</div>
 
 	<div class="background">
@@ -165,6 +172,7 @@
 			</header>
 
 			<form action="HotelServlet" method="post" name="frm">
+				<input type="hidden" name="command" value="detail_search" />
 				<div class="detailSerach_sort">
 					<!-- body영역 정렬 기준 : 낮은 가격순, 높은 가격순 = 가격을 가져와서 asc, desc 하는 정렬 sql구문을 사용해서 정렬해준다.
 						오름 차순 : ASC 내림차순 : DESC -->
@@ -189,16 +197,19 @@
 					<p class="title">뷰타입</p>
 					<div class="view-btn-area typeBtn">
 						<div class="view-btn">
-							<input type="checkbox" name="view_city" id="view_city" /> <label
-								for="view_city" class="type_label"># 시티뷰</label>
+							<input type="checkbox" name="view_city" id="view_city"
+								value="시티뷰" /> <label for="view_city" class="type_label">#
+								시티뷰</label>
 						</div>
 						<div class="view-btn">
-							<input type="checkbox" name="view_ocean" id="view_ocean" /> <label
-								for="view_ocean" class="type_label"># 오션뷰</label>
+							<input type="checkbox" name="view_ocean" id="view_ocean"
+								value="오션뷰" /> <label for="view_ocean" class="type_label">#
+								오션뷰</label>
 						</div>
 						<div class="view-btn">
-							<input type="checkbox" name="view_haver" id="view_haver" /> <label
-								for="view_haver" class="type_label"># 하버뷰</label>
+							<input type="checkbox" name="view_haver" id="view_haver"
+								value="하버뷰" /> <label for="view_haver" class="type_label">#
+								하버뷰</label>
 						</div>
 					</div>
 				</div>
@@ -208,24 +219,29 @@
 					<!-- 근데 이거 다중선택하게 어떻게 함? -->
 					<div class="room-btn-area typeBtn">
 						<div class="room-btn">
-							<input type="checkbox" name="room_double" id="room_double" /> <label
-								for="room_double" class="type_label"># 더블</label>
+							<input type="checkbox" name="room_double" id="room_double"
+								value="더블" /> <label for="room_double" class="type_label">#
+								더블</label>
 						</div>
 						<div class="room-btn">
-							<input type="checkbox" name="room_twin" id="room_twin" /> <label
-								for="room_twin" class="type_label"># 트윈</label>
+							<input type="checkbox" name="room_twin" id="room_twin" value="트윈" />
+							<label for="room_twin" class="type_label"># 트윈</label>
 						</div>
 						<div class="room-btn">
-							<input type="checkbox" name="room_family" id="room_family" /> <label
-								for="room_family" class="type_label"># 패밀리</label>
+							<input type="checkbox" name="room_family" id="room_family"
+								value="패밀리" /> <label for="room_family" class="type_label">#
+								패밀리</label>
 						</div>
 					</div>
 				</div>
 				<div class="detailSerach-modal-foot">
-					<a href="#none" role="button" class="reset-btn" onclick=""> <span>초기화</span>
-					</a> <a href="" role="submit" class="confirm-btn"
-						onclick="closeButton('.background')"> <span>적용</span>
-					</a>
+					<button type="reset" class="reset-btn" onclick="resetButton()">
+						<span>초기화</span>
+					</button>
+					<button type="submit" class="confirm-btn"
+						onclick="closeButton('.background')">
+						<span>적용</span>
+					</button>
 				</div>
 			</form>
 		</div>

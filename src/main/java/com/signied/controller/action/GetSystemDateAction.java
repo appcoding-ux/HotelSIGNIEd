@@ -18,6 +18,7 @@ public class GetSystemDateAction implements Action {
       
 
               SimpleDateFormat outputFormat = new SimpleDateFormat("MM월 dd일 (E)");
+              SimpleDateFormat today = new SimpleDateFormat("yyyy-MM-dd");
 
               // 현재 날짜 가져오기
               Date currentDate = new Date();
@@ -30,11 +31,16 @@ public class GetSystemDateAction implements Action {
               // 날짜 포맷팅
               String dateView = outputFormat.format(currentDate); // 현재 날짜
               String dateView2 = outputFormat.format(calendar.getTime()); // +1일된 날짜
+              String dateIn = today.format(currentDate); // 현재 날짜
+              String dateIn2 = today.format(calendar.getTime()); // +1일된 날짜
               
               OracleJsonObject result = new OracleJsonObjectImpl();
 
               result.put("dateView", dateView);
               result.put("dateView2", dateView2); // dateView2를 추가
+              result.put("dateIn", dateIn);
+              result.put("dateIn2", dateIn2);
+              
               
               response.setContentType("application/json");
               response.setCharacterEncoding("utf-8");

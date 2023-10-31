@@ -55,7 +55,8 @@ public class ActionFactory {
 			action = new ReservationSaveAction();
 		else if(command.equals("Reservation_num")) 
 			action = new ReservationNumAction();
-		
+		else if(command.equals("detail_search")) 
+	         action = new DetailSearchRoom();
 		
 		return action;
 	}

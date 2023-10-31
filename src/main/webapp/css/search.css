@@ -76,10 +76,19 @@ ul,li,ol {list-style: none; margin:0; padding:0;}
 
 /* 10/27 객실 결제 과정 네비게이션 */
 .stepProcess {text-align: center; margin:250px auto 0;}
-.process_col {display: inline-block; font-size: 18px; text-align: center; margin: 0 20px;}
-.on_text {color: #ad9e87; font-weight: bold;}
-.off-text {color:lightgray; font-weight: lighter;}
+.process_col {display: block; letter-spacing: 0; max-width:1170px; margin:24px auto 24px; padding:0 20px; text-align: center; }
+.process_col li {position:relative; display: inline-block; padding-right:60px;}
+.process_col li:nth-child(2) > a{color:#ad9e87;}
+.process_col li::before {content:""; position:absolute; right:-4px; top:calc(50% - 1px); width:40px; height:2px; background:#dcdcdc;}
+.process_col li:last-child::before {background:#fff;}
 
+.process_col li a {position:relative; display: block; padding-left:34px; line-height: 40px; font-size:16px; color:#999; font-weight:600;}
+
+.list_first > a::before {content:"1"; position:absolute; left:0; top:calc(50% - 12px); width:24px; height:24px; border-radius: 50%; text-align: center; line-height:22px; border:1px solid #999; font-size:14px; background: #999; color:#fff;}
+
+.list_second > a::before {content:"2"; position:absolute; left:0; top:calc(50% - 12px); width:24px; height:24px; border-radius: 50%; text-align: center; line-height:22px; border:1px solid #ad9e87; font-size:14px; background: #ad9e87; color:#fff;}
+
+.list_third > a::before {content:"3"; position:absolute; left:0; top:calc(50% - 12px); width:24px; height:24px; border-radius: 50%; text-align: center; line-height:22px; border:1px solid #999; font-size:14px; background: #fff; color:#999;}
 
 /* 검색 결과 > 상세검색 */
 .searchList { margin:30px auto 0; border-bottom:1px solid rgb(174, 141, 117, 0.5); width:100%; padding:18px 20px; height:72px;   }
@@ -164,7 +173,7 @@ ul,li,ol {list-style: none; margin:0; padding:0;}
 
 /* 초기화, 적용 버튼 */
 .detailSerach-modal-foot {width:100%; padding:26px 40px; border-top:1px solid #eee; text-align: right;}
-.detailSerach-modal-foot a {display: inline-block; min-width:152px; padding:10px 20px; border:1px solid #999 !important; text-align: center;}
+.detailSerach-modal-foot button {display: inline-block; min-width:152px; padding:10px 20px; border:1px solid #999 !important; text-align: center;}
 .reset-btn {background:#fff;}
 .reset-btn > span {color:#999; display: block; font-size:18px; word-break: break-all;}
 .confirm-btn {background:#333;}

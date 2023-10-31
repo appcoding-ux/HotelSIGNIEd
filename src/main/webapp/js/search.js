@@ -1,3 +1,6 @@
+var dateIn = "";
+var dateIn2 = "";
+
 $(function() {
    $('.sertchClick > a').click(function(e) {
       e.preventDefault();
@@ -157,6 +160,28 @@ $(function() {
    });
 });
 
+//default date 입력
+$(function() {
+   // 서버에서 현재 날짜를 가져오는 요청
+   $.ajax({
+      url: 'HotelServlet?command=get_date',
+      type: 'get',
+      success: function(response) {
+         var dateView = response.dateView;
+         var dateView2 = response.dateView2;
+         dateIn = response.dateIn;
+         dateIn2 = response.dateIn2;
+         // 가져온 현재 날짜를 이미 존재하는 dateView 엘리먼트에 넣어줌
+         $('.date_day').eq(0).text(dateView);
+         $('.date_day').eq(1).text(dateView2);
+      },
+      error: function() {
+         console.log("에러 발생");
+      }
+   });
+});
+
+
 function amountCount(){
    var amountView = $('.person_num').eq(1).text();
    var amountView2 = $('.person_num').eq(2).text();
@@ -176,21 +201,3 @@ function amountCount(){
    $('.command').append("<input type='hidden' value='" + dateIn2 + "' name='originCheckOut' />");
 }
 
-//default date 입력
-$(function() {
-   // 서버에서 현재 날짜를 가져오는 요청
-   $.ajax({
-      url: 'HotelServlet?command=get_date',
-      type: 'get',
-      success: function(response) {
-         var dateView = response.dateView;
-         var dateView2 = response.dateView2;
-         // 가져온 현재 날짜를 이미 존재하는 dateView 엘리먼트에 넣어줌
-         $('.date_day').eq(0).text(dateView);
-         $('.date_day').eq(1).text(dateView2);
-      },
-      error: function() {
-         console.log("에러 발생");
-      }
-   });
-});
