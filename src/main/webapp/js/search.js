@@ -1,13 +1,13 @@
 var dateIn = "";
 var dateIn2 = "";
 
-$(function() {
-   $('.sertchClick > a').click(function(e) {
+$(function () {
+   $('.sertchClick > a').click(function (e) {
       e.preventDefault();
       $('.sertchWrap').stop().slideToggle();
    });
 
-   $('.date_anchor').click(function(e) {
+   $('.date_anchor').click(function (e) {
       e.preventDefault();
       var dateInput = $('.dateInput');
       if (dateInput.css('top') === '80px' && dateInput.css('opacity') === '1') {
@@ -75,7 +75,7 @@ $(function() {
          'aria-clear-button': '선택된 날짜 지우기',
          'aria-submit-button': '확인 버튼'
       },
-      onSelectRange: function() {
+      onSelectRange: function () {
          console.log('날짜 범위가 선택되었습니다!');
          var inputData = $('#input-id').val(); // input-id의 값을 가져옵니다.
          var bak = $('#tooltip-input-id').text();
@@ -83,18 +83,20 @@ $(function() {
             url: 'HotelServlet?command=date_input', // 서버 엔드포인트 URL을 입력합니다.
             type: 'get',
             data: { data: inputData, bak: bak },
-            success: function(response) {
+            success: function (response) {
                var bak = response.bak; // + 추가 bak을 받아와서 출력함
                $('.night').text(bak);
                var date1 = response.dateView;
                var date2 = response.dateView2;
                console.log(date1);
                console.log(date2);
+               dateIn = response.dateIn;
+               dateIn2 = response.dateIn2;
                // 서버에서 반환된 응답을 hotelCheckinAndCheckout div에 표시합니다.
                $('.date_day').eq(0).text(date1);
                $('.date_day').eq(1).text(date2);
             },
-            error: function() {
+            error: function () {
                console.log("에러 발생");
 
             }
@@ -133,8 +135,8 @@ function del(targetId) {
    }
 }
 
-$(function() {
-   $('.amounts').click(function() {
+$(function () {
+   $('.amounts').click(function () {
 
       $.ajax({
          url: 'HotelServlet?command=people_num', // 서버 엔드포인트 URL을 입력
@@ -143,7 +145,7 @@ $(function() {
             adultAm: $('#adultAmount').val(),
             childAm: $('#childAmount').val()
          },
-         success: function(response) {
+         success: function (response) {
             var amountView = response.amountView;
             var amountView2 = response.amountView2;
             console.log(amountView);
@@ -152,7 +154,7 @@ $(function() {
             $('.person_num').eq(1).text(amountView);
             $('.person_num').eq(2).text(amountView2);
          },
-         error: function() {
+         error: function () {
             console.log("에러 발생", textStatus, errorThrown);
 
          }
@@ -160,13 +162,15 @@ $(function() {
    });
 });
 
+
+
 //default date 입력
-$(function() {
+$(function () {
    // 서버에서 현재 날짜를 가져오는 요청
    $.ajax({
       url: 'HotelServlet?command=get_date',
       type: 'get',
-      success: function(response) {
+      success: function (response) {
          var dateView = response.dateView;
          var dateView2 = response.dateView2;
          dateIn = response.dateIn;
@@ -175,14 +179,13 @@ $(function() {
          $('.date_day').eq(0).text(dateView);
          $('.date_day').eq(1).text(dateView2);
       },
-      error: function() {
+      error: function () {
          console.log("에러 발생");
       }
    });
 });
 
-
-function amountCount(){
+function amountCount() {
    var amountView = $('.person_num').eq(1).text();
    var amountView2 = $('.person_num').eq(2).text();
    var date1 = $('.date_day').eq(0).text();
@@ -191,7 +194,7 @@ function amountCount(){
    console.log(date1);
    console.log(date2);
    console.log(bak);
-   
+
    $('.command').append("<input type='hidden' value='" + amountView + "' name='adultCount' />");
    $('.command').append("<input type='hidden' value='" + amountView2 + "' name='childCount' />");
    $('.command').append("<input type='hidden' value='" + date1 + "' name='checkIn' />");

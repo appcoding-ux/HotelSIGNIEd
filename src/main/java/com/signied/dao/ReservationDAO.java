@@ -42,7 +42,7 @@ public class ReservationDAO {
 				vo.setCheckOut(rs.getString(7));
 				vo.setGuestNum(rs.getInt(8));
 				vo.setBreakfast(rs.getInt(9));
-				vo.setRoomNum2(rs.getInt(10));
+				vo.setRoomNum(rs.getInt(10));
 			}
 			
 		}catch (Exception e) {
@@ -78,7 +78,7 @@ public class ReservationDAO {
 				vo.setCheckOut(rs.getString("checkOut"));
 				vo.setGuestNum(rs.getInt("guestNum"));
 				vo.setBreakfast(rs.getInt("breakfast"));
-				vo.setRoomNum2(rs.getInt("roomNum2"));
+				vo.setRoomNum(rs.getInt("roomNum2"));
 				
 				list.add(vo);
 			}
@@ -116,7 +116,7 @@ public class ReservationDAO {
 			pstmt.setString(7, vo.getCheckOut());
 			pstmt.setInt(8, vo.getGuestNum());
 			pstmt.setInt(9, vo.getBreakfast());
-			pstmt.setInt(10, vo.getRoomNum2());
+			pstmt.setInt(10, vo.getRoomNum());
 			
 			result = pstmt.executeUpdate();
 		}catch (Exception e) {

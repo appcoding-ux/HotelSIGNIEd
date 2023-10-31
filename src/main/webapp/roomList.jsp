@@ -197,17 +197,17 @@
 					<p class="title">뷰타입</p>
 					<div class="view-btn-area typeBtn">
 						<div class="view-btn">
-							<input type="checkbox" name="view_city" id="view_city"
+							<input type="checkbox" name="view" id="view_city"
 								value="시티뷰" /> <label for="view_city" class="type_label">#
 								시티뷰</label>
 						</div>
 						<div class="view-btn">
-							<input type="checkbox" name="view_ocean" id="view_ocean"
+							<input type="checkbox" name="view" id="view_ocean"
 								value="오션뷰" /> <label for="view_ocean" class="type_label">#
 								오션뷰</label>
 						</div>
 						<div class="view-btn">
-							<input type="checkbox" name="view_haver" id="view_haver"
+							<input type="checkbox" name="view" id="view_haver"
 								value="하버뷰" /> <label for="view_haver" class="type_label">#
 								하버뷰</label>
 						</div>
@@ -219,16 +219,16 @@
 					<!-- 근데 이거 다중선택하게 어떻게 함? -->
 					<div class="room-btn-area typeBtn">
 						<div class="room-btn">
-							<input type="checkbox" name="room_double" id="room_double"
+							<input type="checkbox" name="room" id="room_double"
 								value="더블" /> <label for="room_double" class="type_label">#
 								더블</label>
 						</div>
 						<div class="room-btn">
-							<input type="checkbox" name="room_twin" id="room_twin" value="트윈" />
+							<input type="checkbox" name="room" id="room_twin" value="트윈" />
 							<label for="room_twin" class="type_label"># 트윈</label>
 						</div>
 						<div class="room-btn">
-							<input type="checkbox" name="room_family" id="room_family"
+							<input type="checkbox" name="room" id="room_family"
 								value="패밀리" /> <label for="room_family" class="type_label">#
 								패밀리</label>
 						</div>

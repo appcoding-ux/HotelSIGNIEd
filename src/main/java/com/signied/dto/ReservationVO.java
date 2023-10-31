@@ -18,5 +18,5 @@ public class ReservationVO {
 	private String checkOut;
 	private int guestNum;
 	private int breakfast;
-	private int roomNum2;
+	private int roomNum;
 }

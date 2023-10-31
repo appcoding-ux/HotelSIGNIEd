@@ -1,14 +1,12 @@
-var dateIn = "";
-var dateIn2 = "";
 
-$(function() {
-	$("#show").click(function(e) {
+$(function () {
+	$("#show").click(function (e) {
 		e.preventDefault();
 		$(".background").addClass(" show"); // Remove the "show" class
 		$('.detailSearch').stop().show();
 	});
 
-	$('.background').click(function(e) {
+	$('.background').click(function (e) {
 		if ($(e.target).hasClass('background')) { // Check if the click was on the .background element
 			$('.detailSearch').stop().hide(300);
 			$(".background").removeClass(" show"); // Add the "show" class back
@@ -17,7 +15,7 @@ $(function() {
 
 	$('.price-btn label').eq(0).css({ background: "#dcdcdc", "color": "#333" });
 
-	$('.price-btn input').on('change', function() {
+	$('.price-btn input').on('change', function () {
 		// 모든 라디오 버튼과 연결된 라벨의 스타일 초기화
 		$('.price-btn input').siblings('.sort_label').css({ "background": "#fff", "color": "#999" });
 
@@ -28,14 +26,14 @@ $(function() {
 		$('.price-btn input').not(this).prop('checked', false);
 	});
 
-	$('.typeBtn input').on('change', function() {
+	$('.typeBtn input').on('change', function () {
 		if ($(this).prop('checked')) {
 			$(this).siblings('.type_label').css({ backgroundColor: "#6f6051", color: "#fff" });
 		} else {
 			$(this).siblings('.type_label').css({ backgroundColor: "#fff", color: "#333" });
 		}
 	});
-	
+
 
 
 });
@@ -46,17 +44,17 @@ function closeButton(e) {
 	$(".background").removeClass(" show"); // Add the "show" class back
 }
 
-function resetButton(){
+function resetButton() {
 	$('.type_label').css({ backgroundColor: "#fff", color: "#333" });
 }
 
-$(function() {
-	$('.sertchClick > a').click(function(e) {
+$(function () {
+	$('.sertchClick > a').click(function (e) {
 		e.preventDefault();
 		$('.sertchWrap').stop().slideToggle();
 	});
 
-	$('.date_anchor').click(function(e) {
+	$('.date_anchor').click(function (e) {
 		e.preventDefault();
 		var dateInput = $('.dateInput');
 		if (dateInput.css('top') === '80px' && dateInput.css('opacity') === '1') {
@@ -124,26 +122,28 @@ $(function() {
 			'aria-clear-button': '선택된 날짜 지우기',
 			'aria-submit-button': '확인 버튼'
 		},
-		onSelectRange: function() {
+		onSelectRange: function () {
 			console.log('날짜 범위가 선택되었습니다!');
 			var inputData = $('#input-id').val(); // input-id의 값을 가져옵니다.
-			var bak = $('#tooltip-input-id').text();
+			bak = $('#tooltip-input-id').text();
 			$.ajax({
 				url: 'HotelServlet?command=date_input', // 서버 엔드포인트 URL을 입력합니다.
 				type: 'get',
 				data: { data: inputData, bak: bak },
-				success: function(response) {
-					var bak = response.bak; // + 추가 bak을 받아와서 출력함
+				success: function (response) {
+					bak = response.bak; // + 추가 bak을 받아와서 출력함
 					$('.night').text(bak);
-					var date1 = response.dateView;
-					var date2 = response.dateView2;
+					date1 = response.dateView;
+					date2 = response.dateView2;
+					dateIn = response.dateIn;
+					dateIn2 = response.dateIn2;
 					console.log(date1);
 					console.log(date2);
 					// 서버에서 반환된 응답을 hotelCheckinAndCheckout div에 표시합니다.
 					$('.date_day').eq(0).text(date1);
 					$('.date_day').eq(1).text(date2);
 				},
-				error: function() {
+				error: function () {
 					console.log("에러 발생");
 
 				}
@@ -182,8 +182,8 @@ function del(targetId) {
 	}
 }
 
-$(function() {
-	$('.amounts').click(function() {
+$(function () {
+	$('.amounts').click(function () {
 
 		$.ajax({
 			url: 'HotelServlet?command=people_num', // 서버 엔드포인트 URL을 입력
@@ -192,37 +192,42 @@ $(function() {
 				adultAm: $('#adultAmount').val(),
 				childAm: $('#childAmount').val()
 			},
-			success: function(response) {
-				var amountView = response.amountView;
-				var amountView2 = response.amountView2;
+			success: function (response) {
+				amountView = response.amountView;
+				amountView2 = response.amountView2;
 				console.log(amountView);
 				console.log(amountView2);
 				// 서버에서 반환된 응답을 hotelCheckinAndCheckout div에 표시
 				$('.person_num').eq(1).text(amountView);
 				$('.person_num').eq(2).text(amountView2);
 			},
-			error: function() {
+			error: function () {
 				console.log("에러 발생", textStatus, errorThrown);
 
 			}
 		})
 	});
-})
+});
+
+var dateIn = "";
+var dateIn2 = "";
+var amountView = "";
+var amountView2 = "";
+var bak = "";
+var date1 = "";
+var date2 = "";
 
 function amountCount() {
-	var amountView = $('.person_num').eq(1).text();
-	var amountView2 = $('.person_num').eq(2).text();
-	var date1 = $('.date_day').eq(0).text();
-	var date2 = $('.date_day').eq(1).text();
-	var bak = $('.night').text();
+	var roomNum = $('#roomNum').val();
 
 	$('.command').append("<input type='hidden' value='" + amountView + "' name='adultCount' />");
 	$('.command').append("<input type='hidden' value='" + amountView2 + "' name='childCount' />");
+	$('.command').append("<input type='hidden' value='" + bak + "' name='bak' />");
+	$('.command').append("<input type='hidden' value='" + roomNum + "' name='roomNum' />");
 	$('.command').append("<input type='hidden' value='" + date1 + "' name='checkIn' />");
 	$('.command').append("<input type='hidden' value='" + date2 + "' name='checkOut' />");
-	$('.command').append("<input type='hidden' value='" + bak + "' name='bak' />");
 	$('.command').append("<input type='hidden' value='" + dateIn + "' name='originCheckIn' />");
-	$('.command').append("<input type='hidden' value='" + dateIn2 + "' name='originCheckout' />");
+	$('.command').append("<input type='hidden' value='" + dateIn2 + "' name='originCheckOut' />");
 }
 
 function submitForm() {
