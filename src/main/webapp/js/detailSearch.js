@@ -1,22 +1,46 @@
 $(function() {
-  $("#show").click(function(e) {
-    e.preventDefault();
-    $(".background").addClass(" show"); // Remove the "show" class
-    $('.detailSearch').stop().show();
-  });
+	$("#show").click(function(e) {
+		e.preventDefault();
+		$(".background").addClass(" show"); // Remove the "show" class
+		$('.detailSearch').stop().show();
+	});
 
-  $('.background').click(function(e) {
-    if ($(e.target).hasClass('background')) { // Check if the click was on the .background element
-      $('.detailSearch').stop().hide(300);
-      $(".background").removeClass(" show"); // Add the "show" class back
-    }
-  });
+	$('.background').click(function(e) {
+		if ($(e.target).hasClass('background')) { // Check if the click was on the .background element
+			$('.detailSearch').stop().hide(300);
+			$(".background").removeClass(" show"); // Add the "show" class back
+		}
+	});
+
+	$('.price-btn label').eq(0).css({ background: "#dcdcdc", "color": "#333" });
+
+	$('.price-btn input').on('change', function() {
+		// 모든 라디오 버튼과 연결된 라벨의 스타일 초기화
+		$('.price-btn input').siblings('.sort_label').css({ "background": "#fff", "color": "#999" });
+
+		// 현재 선택된 라디오 버튼과 연결된 라벨의 스타일 설정
+		$(this).siblings('.sort_label').css({ "background": "#dcdcdc", "color": "#333" });
+
+		// 다른 라디오 버튼의 체크 상태를 해제
+		$('.price-btn input').not(this).prop('checked', false);
+	});
+
+	$('.typeBtn input').on('change', function() {
+		if ($(this).prop('checked')) {
+			$(this).siblings('.type_label').css({ backgroundColor: "#6f6051", color: "#fff" });
+		} else {
+			$(this).siblings('.type_label').css({ backgroundColor: "#fff", color: "#333" });
+		}
+	});
+	
+
+
 });
 
-function closeButton(e){
+function closeButton(e) {
 	if ($(e.target).hasClass('background'))  // Check if the click was on the .background element
-      $('.detailSearch').stop().hide(300);
-      $(".background").removeClass(" show"); // Add the "show" class back
+		$('.detailSearch').stop().hide(300);
+	$(".background").removeClass(" show"); // Add the "show" class back
 }
 
 $(function() {
