@@ -186,15 +186,10 @@ $(function () {
 });
 
 function amountCount() {
-   var amountView = $('.person_num').eq(1).text();
-   var amountView2 = $('.person_num').eq(2).text();
-   var date1 = $('.date_day').eq(0).text();
-   var date2 = $('.date_day').eq(1).text();
    var bak = $('.night').text();
    console.log(date1);
    console.log(date2);
    console.log(bak);
-
    $('.command').append("<input type='hidden' value='" + amountView + "' name='adultCount' />");
    $('.command').append("<input type='hidden' value='" + amountView2 + "' name='childCount' />");
    $('.command').append("<input type='hidden' value='" + date1 + "' name='checkIn' />");

@@ -12,7 +12,6 @@ public class ReservationSaveAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, Exception {
-
 		System.out.println("리스트에서 넘긴 데이터" + request.getParameter("originCheckIn"));
 		System.out.println("리스트에서 넘긴 데이터" + request.getParameter("originCheckout"));
 		System.out.println("리스트에서 넘긴 데이터" + request.getParameter("checkIn"));
