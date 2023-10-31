@@ -202,4 +202,3 @@ function amountCount() {
    $('.command').append("<input type='hidden' value='" + dateIn + "' name='originCheckIn' />");
    $('.command').append("<input type='hidden' value='" + dateIn2 + "' name='originCheckOut' />");
 }
-

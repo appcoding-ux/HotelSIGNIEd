@@ -24,32 +24,38 @@
 <body>
 	<jsp:include page="header.jsp" />
 	<div
-		style="margin: 300px auto 0; width: 1320px; position: relative; z-index: 1000;">
+		style="margin:240px auto 0; width: 1320px; position: relative; z-index: 1000;">
 
 		<form name="frm" method="post" action="HotelServlet">
-			<input type="hidden" name="command" value="Reservation_save">
+			<input type="hidden" name="command" value="Reservation_complete">
+			<input type="hidden" name="originCheckIn" value="${originCheckIn}" />
+			<input type="hidden" name="originCheckOut" value="${originCheckOut}" />
+			<input type="hidden" name="adult" value="${adult}" />
+			<input type="hidden" name="child" value="${child}" />
+			<input type="hidden" name="bak" value="${bak}" />
+			<input type="hidden" name="roomNum" value="${roomNum}" />
 
 			<div class="reservation-room-info">
 				<div class="img-area m-none">
 					<img src="image/karina.png" alt="karina">
 
 					<div class="txt-area">
-						<li><span class="type f-bold">호텔 및 객실</span> <span
-							class="info htlAndRms">그랜드 디럭스 더블 시티뷰</span></li>
+						<li><span class="type">호텔 및 객실</span> <span
+							class="info htlAndRms">${roomName}</span></li>
 
-						<li><span class="type f-bold">투숙 날짜</span> <span class="info">
-								<span data-target="conversionDateFormat">2023년 10월 30일</span> -
-								<span data-target="conversionDateFormat">2023년 10월 31일</span> (1
-								<span class="night-days" data-rdays="1">박</span>)
+						<li><span class="type">투숙 날짜</span> <span class="info">
+								<span data-target="conversionDateFormat">${originCheckIn}</span> -
+								<span data-target="conversionDateFormat">${originCheckOut}</span>(
+								<span class="night-days" data-rdays="1">${bak}</span>)
 						</span></li>
-						<li><span class="type f-bold">객실 및 인원</span> <span
-							class="info">객실 1, 성인 2, 어린이 0</span></li>
+						<li><span class="type">객실 및 인원</span> <span
+							class="info">객실 1, 성인${adult} , 어린이${child} </span></li>
 
 					</div>
 				</div>
 
 				<div class="totalprice">
-					<span class="total-price">총 요금</span> <span class="total-number">1000000</span>
+					<span class="total-price">총 요금</span> <span class="total-number">${roomPrice}</span>
 
 
 				</div>

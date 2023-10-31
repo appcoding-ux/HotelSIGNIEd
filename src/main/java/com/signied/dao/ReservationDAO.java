@@ -17,7 +17,7 @@ public class ReservationDAO {
 	public static ReservationDAO getInstance() {
 		return instance;
 	}
-	
+// 예약조회	
 	public ReservationVO selectOneByNum(int num) {
 		ReservationVO vo = null;
 		String sql = "select * from reservation where RESERVENUM =?";
@@ -52,7 +52,7 @@ public class ReservationDAO {
 		}
 		return vo;
 	}
-	
+// 리스트(쓸일 있을것같아서 만들었습니다)	
 	public List<ReservationVO> selectAllBoards() {
 		
 		List<ReservationVO> list = new ArrayList<ReservationVO>();
@@ -78,7 +78,7 @@ public class ReservationDAO {
 				vo.setCheckOut(rs.getString("checkOut"));
 				vo.setGuestNum(rs.getInt("guestNum"));
 				vo.setBreakfast(rs.getInt("breakfast"));
-				vo.setRoomNum(rs.getInt("roomNum2"));
+				vo.setRoomNum(rs.getInt("roomNum"));
 				
 				list.add(vo);
 			}
@@ -92,13 +92,10 @@ public class ReservationDAO {
 		}
 		return list;
 	}
-
+// 예약등록
 	public int insertReservation(ReservationVO vo1) {
 		int result = -1;
-		
-		ReservationVO vo = null;
-		String sql = "insert into reservation(reserveNum,reserveEmail, reserveName, reservePhone, checkIn, checkOut,guestNum, breakfast,roomNum) "
-				+ "values(?,?,?,?,?,?,?,?,?)";
+		String sql = "insert into RESERVATION values(RESERVATION_SEQ.nextval, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		Connection conn =null;
 		PreparedStatement pstmt = null;
 		
@@ -107,16 +104,36 @@ public class ReservationDAO {
 			conn = DBManager.getConnection();
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setInt(1, vo.getReserveNum());
-			pstmt.setString(2, vo.getReserveEmail());
-			pstmt.setString(3, vo.getReservePwd());
-			pstmt.setString(4, vo.getReserveName());
-			pstmt.setString(5, vo.getReservePhone());
-			pstmt.setString(6, vo.getCheckIn());
-			pstmt.setString(7, vo.getCheckOut());
-			pstmt.setInt(8, vo.getGuestNum());
-			pstmt.setInt(9, vo.getBreakfast());
-			pstmt.setInt(10, vo.getRoomNum());
+			pstmt.setString(1, vo1.getReserveEmail());
+			pstmt.setString(2, vo1.getReservePwd());
+			pstmt.setString(3, vo1.getReserveName());
+			pstmt.setString(4, vo1.getReservePhone());
+			pstmt.setString(5, vo1.getCheckIn());
+			pstmt.setString(6, vo1.getCheckOut());
+			pstmt.setInt(7, vo1.getGuestNum());			
+			pstmt.setInt(8, vo1.getBreakfast());
+			pstmt.setInt(9, vo1.getRoomNum());
+			
+			result = pstmt.executeUpdate();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBManager.close(conn, pstmt);
+		}
+		return result;
+	}
+// 예약 삭제
+	public int deleteReservation(int num) {
+		int result = -1;
+		String sql = "delete from reservation where reservenum=?";
+		
+		Connection conn =null;
+		PreparedStatement pstmt = null;
+		try {
+			conn = DBManager.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, num);
 			
 			result = pstmt.executeUpdate();
 		}catch (Exception e) {

@@ -24,10 +24,11 @@
 <body>
 	<jsp:include page="header.jsp" />
 	<div
-		style="margin: 300px auto 0; width: 1320px; position: relative; z-index: 1000;">
+		style="margin: 180px auto 0; width: 1320px; position: relative; z-index: 1000;">
+		<div class="maintitle">
 		<h2>예약 조회</h2>
 		<h5>객실 조회</h5>
-	
+		</div>
 		<form name="frm" method="post" action="HotelServlet">
 			<input type="hidden" name="command" value="Reservation_num">
 

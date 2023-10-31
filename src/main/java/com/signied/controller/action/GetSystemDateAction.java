@@ -41,9 +41,6 @@ public class GetSystemDateAction implements Action {
               result.put("dateIn", dateIn);
               result.put("dateIn2", dateIn2);
               
-              
-              response.setContentType("application/json");
-              response.setCharacterEncoding("utf-8");
               response.getWriter().write(result.toString());
       }
    }

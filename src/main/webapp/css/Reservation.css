@@ -1,30 +1,31 @@
-h2{
-	margin-bottom: 26px;
-    font-size: 45px;
+
+h2, h5 {
     text-align: center;
-    margin-block-start: 0.67em;
-    margin-block-end: 0.67em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
- }
- .info-title{
+    margin-top: 0;
+}
+
+h2 {
+    font-size: 45px;
+    margin: 0; 
+}
+
+
+h5 {
+    font-size: 20px;
+    font-weight: lighter;
+}
+
+.info-title{
 	 text-align: center;
 	 font-size: 45px;
 	 margin-top: 250px;
  }
  
-h5{
-    font-size: 20px;
-    font-weight: lighter;
-    text-align: center;
-    margin-bottom:20px;
-}
-
 .col-box {
 	margin:0 auto;
 	width:720px;
 	margin-bottom: 10px;
-	margin-top: 100px;
+	margin-top: 30px;
 	
 	
 }
@@ -91,21 +92,17 @@ body{
     font-size: 18px;
     padding: 24px;
     border-bottom: 1px solid #dcdcdc;
-	
+	float:right;
 }
 li{
 	margin-bottom: 40px;
-	text-align: right;
-	
 }
-.type f-bold{
+.type{
 	text-align: left;
 	
 }
-.info htlAndRms .info{
-	text-align: right;
-    padding-left: 20px;
-    width: 76%;
+.info{
+	float:right;
 }
 .totalprice{
 	text-align: right;
@@ -124,6 +121,5 @@ li{
 	text-align: center;
 }
 img{
-	width: 40%;
-	margin-top: 20px;   
+	width: 40%;  
 }

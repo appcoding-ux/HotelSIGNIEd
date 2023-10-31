@@ -57,7 +57,16 @@ public class ActionFactory {
 			action = new ReservationNumAction();
 		else if (command.equals("detail_search"))
 			action = new DetailSearchRoom();
+		else if (command.equals("Reservation_complete"))
+			action = new ReservationComplete();
+		else if (command.equals("Reservation_pass_check_form"))
+			action = new ReservationPassCheckForm();
+		else if (command.equals("Reservation_check_pass"))
+			action = new ReservationCheckPass();
+		else if (command.equals("Reservation_delete")) {
+			action = new ReservationDelete();
 
-		return action;
+			return action;
+		}
 	}
 }
