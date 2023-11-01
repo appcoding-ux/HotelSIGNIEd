@@ -69,11 +69,27 @@ ul,li,ol {list-style: none; margin:0; padding:0;}
 .sertchButton:hover {background: #fff; color: #998465;}
 
 /* 데이터 검색 달력 */
-.dateInput {display:none ; top:40px; position:absolute; z-index:100; left:200px; width:1000px; text-align: left; background-color: #fff; border-radius: 10px; box-shadow: 0 15px 60px 0 rgba(0,0,0,0.15); overflow: hidden; outline-offset: 2px; min-height: 343px;}
-.dateInput div {float:left;}
-.datePerson {margin:40px 0 20px 60px;}
-.datePerson input:nth-child(2) {text-align: center;}
-.datePerson input:nth-child(5) {text-align: center;}
-.amounts {text-align: center}
-/* 달력 구현했다 시....... */
-.datepicker {margin:40px 0 20px 30px;}
+.dateInput {display:none ; top:40px; position:absolute; z-index:100; left:200px; width:1000px; text-align: left; background-color: #fff; border-radius: 10px;overflow: hidden; outline-offset: 2px; min-height: 343px;}
+.dateInput > div { position:relative; z-index:100; float:left;}
+
+.amounts {text-align: center;}
+
+
+
+/* 달력 구현  */
+.datepicker {margin:40px 0 20px 30px; border-right:1px solid #eee; box-shadow: none;}
+
+.datePerson {margin:60px 0 20px 30px;}
+.datePerson > span {display:inline-block; min-width:51px; font-size:14px; color:#000; line-height:34px;}
+
+.datePersonBtn {display:inline-block; min-width:134px; vertical-align: top; padding:0 33px; position:relative;}
+
+.datePersonBtn > span {position:relative; z-index:2; width:100%; border:1px solid #bbb; background-color:#fff; text-align: center; pointer-events: none; height:34px; line-height:33px; font-size:14px; display: block;}
+
+.personNum {overflow: hidden; position:absolute; width:1px; height:1px; opacity: 0;}
+
+.personPlus {width:34px; height:34px; position:absolute; top:0; left:0; border:1px solid #bbb; z-index:5; border-top-left-radius: 8px; border-bottom-left-radius: 8px;}
+.personMinus {width:34px; height:34px; position:absolute; top:0; right:0; border:1px solid #bbb; z-index:5; border-top-right-radius: 8px; border-bottom-right-radius: 8px;}
+
+.personPlus span {display:inline-block; font-size:26px; line-height:16px;}
+.personMinus span {display:inline-block; font-size:26px; line-height:16px;}

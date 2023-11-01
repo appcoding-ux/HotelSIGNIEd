@@ -7,6 +7,7 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.Action;
 
 import com.signied.dao.SigniedSearchDAO;
 import com.signied.dto.RoomVO;
@@ -34,12 +35,12 @@ public class DetailSearchRoom implements Action {
 	    roomList = sDao.detailSearchRoom(sort, viewTypeList, roomTypesList, roomList);  // roomList를 인자로 추가
  
 		if(roomList.isEmpty()) {
-			request.setAttribute("message", "해당 일자에 예약 가능한 객실 및 상품조회 결과가 없습니다.\n"
-					+ "\n"
-					+ "상단 예약 검색바에서 일정을 변경하신 후 수정 버튼을 다시 한 번 클릭해 주세요.");
-		}else {
-			request.setAttribute("roomList", roomList);
-		}
+         request.setAttribute("message", "해당 일자에 예약 가능한 객실 및 상품조회 결과가 없습니다.<br><br>"
+               + "\n"
+               + "상단 예약 검색바에서 일정을 변경하신 후 수정 버튼을 다시 한 번 클릭해 주세요.");
+      	}else {
+         request.setAttribute("roomList", roomList);
+      	}
 		
 		// 예약할 때 쓸 date형식의 데이터
 		String checkIn = request.getParameter("originCheckIn");
