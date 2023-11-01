@@ -27,10 +27,11 @@ public class SearchRoomList implements Action {
       request.setAttribute("child", request.getParameter("childCount"));
       request.setAttribute("checkIn", request.getParameter("checkIn"));
       request.setAttribute("checkOut", request.getParameter("checkOut"));
+
       int totalAmount = Integer.parseInt(request.getParameter("adultAmount"))
             + Integer.parseInt(request.getParameter("childAmount"));
 
-      List<RoomVO> roomList = sDao.searchRoom(checkIn, checkOut, totalAmount);
+      List<RoomVO> roomList = sDao.searchRoom(checkIn, checkOut, totalAmount); // 호텔에 있는 전체 방 검색 (체크인, 체크아웃 날짜를 고려해 검색)
       request.setAttribute("roomList", roomList);
 
       RequestDispatcher dis = request.getRequestDispatcher("roomList.jsp");

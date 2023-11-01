@@ -3,6 +3,7 @@ package com.signied.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,27 +12,29 @@ import com.signied.util.DBManager;
 
 public class ReservationDAO {
 	private static ReservationDAO instance = new ReservationDAO();
-	
-	private ReservationDAO() {}
-	
+
+	private ReservationDAO() {
+	}
+
 	public static ReservationDAO getInstance() {
 		return instance;
 	}
-// 예약조회	
+
+	// 예약조회
 	public ReservationVO selectOneByNum(int num) {
 		ReservationVO vo = null;
-		String sql = "select * from reservation where RESERVENUM =?";
-		Connection conn =null;
+		String sql = "select * from reservation where RESERVENUM = ?";
+		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		
+
 		try {
 			conn = DBManager.getConnection();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, num);
 			rs = pstmt.executeQuery();
-			
-			if(rs.next()) {
+
+			if (rs.next()) {
 				vo = new ReservationVO();
 				vo.setReserveNum(rs.getInt(1));
 				vo.setReserveEmail(rs.getString(2));
@@ -44,30 +47,30 @@ public class ReservationDAO {
 				vo.setBreakfast(rs.getInt(9));
 				vo.setRoomNum(rs.getInt(10));
 			}
-			
-		}catch (Exception e) {
+
+		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			DBManager.close(conn, pstmt, rs);
 		}
 		return vo;
 	}
-// 리스트(쓸일 있을것같아서 만들었습니다)	
+
 	public List<ReservationVO> selectAllBoards() {
-		
+
 		List<ReservationVO> list = new ArrayList<ReservationVO>();
 		ReservationVO vo = null;
 		String sql = "select * from reservation where reserveNum = ?";
-		Connection conn =null;
+		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		
+
 		try {
 			conn = DBManager.getConnection();
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
-			
-			if(rs.next()) {
+
+			if (rs.next()) {
 				vo = new ReservationVO();
 				vo.setReserveNum(rs.getInt("reserveNum"));
 				vo.setReserveEmail(rs.getString("reserveEmail"));
@@ -79,71 +82,107 @@ public class ReservationDAO {
 				vo.setGuestNum(rs.getInt("guestNum"));
 				vo.setBreakfast(rs.getInt("breakfast"));
 				vo.setRoomNum(rs.getInt("roomNum"));
-				
+
 				list.add(vo);
 			}
-			
-			
-			
-		}catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			DBManager.close(conn, pstmt, rs);
 		}
 		return list;
 	}
-// 예약등록
+
+	// 예약등록
 	public int insertReservation(ReservationVO vo1) {
 		int result = -1;
-		String sql = "insert into RESERVATION values(RESERVATION_SEQ.nextval, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-		Connection conn =null;
+		String sql = "insert into RESERVATION values (RESERVATION_SEQ.nextval, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		Connection conn = null;
 		PreparedStatement pstmt = null;
-		
-		
+
 		try {
 			conn = DBManager.getConnection();
 			pstmt = conn.prepareStatement(sql);
-			
+
 			pstmt.setString(1, vo1.getReserveEmail());
 			pstmt.setString(2, vo1.getReservePwd());
 			pstmt.setString(3, vo1.getReserveName());
 			pstmt.setString(4, vo1.getReservePhone());
 			pstmt.setString(5, vo1.getCheckIn());
 			pstmt.setString(6, vo1.getCheckOut());
-			pstmt.setInt(7, vo1.getGuestNum());			
+			pstmt.setInt(7, vo1.getGuestNum());
 			pstmt.setInt(8, vo1.getBreakfast());
 			pstmt.setInt(9, vo1.getRoomNum());
-			
+
 			result = pstmt.executeUpdate();
-		}catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			DBManager.close(conn, pstmt);
 		}
 		return result;
 	}
-// 예약 삭제
+
+	// 예약 삭제
 	public int deleteReservation(int num) {
 		int result = -1;
 		String sql = "delete from reservation where reservenum=?";
-		
-		Connection conn =null;
+
+		Connection conn = null;
 		PreparedStatement pstmt = null;
 		try {
 			conn = DBManager.getConnection();
 			pstmt = conn.prepareStatement(sql);
-			
+
 			pstmt.setInt(1, num);
-			
+
 			result = pstmt.executeUpdate();
-		}catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			DBManager.close(conn, pstmt);
 		}
 		return result;
 	}
 
+	public boolean isRoomAvailable(int roomNum, String checkIn, String checkOut) throws SQLException {
+		String sql = "SELECT r.roomNum, r.inventory, COALESCE(res.daily_reserved_count, 0) as daily_reserved_count "
+				+ "FROM room r "
+				+ "LEFT JOIN ( "
+				+ "    SELECT roomNum, COUNT(*) as daily_reserved_count "
+				+ "    FROM reservation "
+				+ "    WHERE (checkIn <= TO_DATE( ? , 'YYYY-MM-DD') AND checkOut > TO_DATE( ? , 'YYYY-MM-DD')) "
+				+ "    AND roomNum = ? "
+				+ "    GROUP BY roomNum "
+				+ ") res ON r.roomNum = res.roomNum "
+				+ "WHERE r.roomNum = ?";
 
-		
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			conn = DBManager.getConnection();
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, checkIn);
+			ps.setString(2, checkOut);
+			ps.setInt(3, roomNum);
+			ps.setInt(4, roomNum);
+
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
+				int inventory = rs.getInt("inventory");
+				int reservedCount = rs.getInt("daily_reserved_count");
+
+				return reservedCount < inventory;
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(conn, ps, rs);
+		}
+		return false;
+	}
 }

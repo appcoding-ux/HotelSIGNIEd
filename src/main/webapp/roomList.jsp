@@ -125,6 +125,10 @@
          </div>
       </div>
 
+	  <div>
+	  	<p>${message}</p>
+	  </div>
+		
       <div class="roomList">
          <form action="HotelServlet" name="frm" method="post" id="roomFrm">
             <input type="hidden" name="command" value="Reservation_save" />
@@ -135,25 +139,30 @@
             <input type="hidden" name="checkOut" value="${checkOut}" />
             <input type="hidden" name="adultAmount" value="${adult}" />
             <input type="hidden" name="childAmount" value="${child}" />
-                  
-            <table>
-               <c:forEach var="room" items="${roomList }">
-                  <input type="hidden" name="roomNum" value="${room.roomNum}"
-                     id="roomNum" />
-                     
-                  <tr class="record">
-                     <td><img src="${room.img}" width="560" height="320" /></td>
-                     <td><a
-                        href="HotelServlet?command=room_list&num=${room.roomNum}">${room.roomName}</a></td>
-                     <td>| 전망 ${room.viewType} | 최대인원수 ${room.roomCapacity}</td>
-                     <td>침대타입 ${room.roomType}</td>
-                     <td><fmt:formatNumber type="currency"
-                           value="${room.roomPrice}" currencySymbol="￦" /></td>
-                     <td><button type="submit" form="roomFrm">예약하기</button></td>
-                     <td>
-                  </tr>
-               </c:forEach>
-            </table>
+            <input type="hidden" name="roomList" value="${roomList}" />
+            
+           <c:forEach var="room" items="${roomList }">
+            <input type="hidden" name="roomNum" value="${room.roomNum}" id="roomNum" />
+            <input type="hidden" name="roomName" value="${room.roomName}" id="roomName" />
+            <input type="hidden" name="img" value="${room.img}" id="img" />
+            <div class="record">
+               <div class="roomImg">
+                  <img src="${room.img}" />
+               </div>
+               <div class="room_info">
+                  <div class="roomN"><a href="HotelServlet?command=room_list&num=${room.roomNum}">${room.roomName}</a></div>
+                  <p>|&emsp;&emsp; 전망 &emsp;${room.viewType} &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; | &emsp;&emsp;최대인원수 &emsp;${room.roomCapacity} 명</p>
+                  <p>침대타입 ${room.roomType}</p>
+                  <p>
+                     <fmt:formatNumber type="currency" value="${room.roomPrice}"
+                        currencySymbol="￦" />
+                  </p>
+                  <button type="submit" form="myForm" onclick="submitForm()">예약하기</button>
+               </div>
+            </div>
+         </c:forEach>
+
+           
          </form>
       </div>
    </div>
@@ -245,9 +254,6 @@
             </div>
          </form>
       </div>
-
-
    </div>
-
 </body>
 </html>

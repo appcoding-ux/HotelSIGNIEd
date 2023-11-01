@@ -13,28 +13,32 @@ public class ReservationSaveAction implements Action {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, Exception {
 
-		System.out.println("체크인" + request.getParameter("originCheckIn"));
-		System.out.println("체크 아웃" + request.getParameter("originCheckOut"));
-		System.out.println("성인 인원" + request.getParameter("adultAmount"));
-		System.out.println("아동 인원" + request.getParameter("childAmount"));
-		System.out.println("몇 박" + request.getParameter("bak"));
-		System.out.println("객실 고유번호" + request.getParameter("roomNum"));
-		System.out.println("객실 이름" + request.getParameter("roomName"));
-		System.out.println("객실 가격" + request.getParameter("roomPrice"));
+		ReservationDAO rDao = ReservationDAO.getInstance();
 
-		request.setAttribute("originCheckIn", request.getParameter("originCheckIn"));
-		request.setAttribute("originCheckOut", request.getParameter("originCheckOut"));
-		request.setAttribute("adult", request.getParameter("adultAmount"));
-		request.setAttribute("child", request.getParameter("childAmount"));
-		request.setAttribute("bak", request.getParameter("bak"));
-		request.setAttribute("roomNum", request.getParameter("roomNum"));
-		request.setAttribute("roomName", request.getParameter("roomName"));
-		request.setAttribute("roomPrice", request.getParameter("roomPrice"));
-		request.setAttribute("img", request.getParameter("img"));
+		int roomNum = Integer.parseInt(request.getParameter("roomNum")); // 예약하기 버튼을 클릭했을 때 클릭한 룸 번호
+		String checkIn = request.getParameter("checkIn"); // 고객이 입력한 체크인
+		String checkOut = request.getParameter("checkOut"); // 고객이 입력한 체크아웃
 
-		RequestDispatcher dis = request.getRequestDispatcher("ReservationForm.jsp");
-		dis.forward(request, response);
+		boolean roomAvailable = rDao.isRoomAvailable(roomNum, checkIn, checkOut); // 예약하기를 눌렀을 때 클릭한 룸의 제고가 남아 있는지 체크
 
+		request.setAttribute("checkIn", checkIn); // 화면에 표시되는 체크인 
+		request.setAttribute("checkOut", checkOut); // 화면에 표시되는 체크아웃 
+		request.setAttribute("originCheckIn", request.getParameter("originCheckIn")); // 데이터베이스에 저장할 date형식 체크인
+		request.setAttribute("originCheckout", request.getParameter("originCheckout")); // 데이터베이스에 저장할 date형식 체크아웃
+		request.setAttribute("adult", request.getParameter("adultAmount")); // 어른 수
+		request.setAttribute("child", request.getParameter("childAmount")); // 어린이 수
+		request.setAttribute("bak", request.getParameter("bak")); // 숙박 일 수 
+		request.setAttribute("roomNum", roomNum); // 클릭한 룸 번호
+
+		if (roomAvailable == true) { // 제고가 남아있을 경우
+			String url = "ReservationForm.jsp";
+
+			RequestDispatcher dis = request.getRequestDispatcher(url);
+			dis.forward(request, response);
+			
+		} else { // 제고가 없는 경우 다시 roomlist.jsp로 forward시킨다.
+			RequestDispatcher dis = request.getRequestDispatcher("roomList.jsp");
+			dis.forward(request, response);
+		}
 	}
-
 }

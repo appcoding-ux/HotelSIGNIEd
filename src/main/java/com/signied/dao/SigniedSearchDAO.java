@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
+import java.util.stream.Collectors;
 
 import com.signied.dto.RoomVO;
 import com.signied.util.DBManager;
@@ -25,16 +26,30 @@ public class SigniedSearchDAO {
 	public List<RoomVO> searchRoom(String checkIn, String checkOut, int totalAmount) throws SQLException {
 
 		List<RoomVO> list = new ArrayList<RoomVO>();
+		// 주어진 체크인/체크아웃 날짜에 사용 가능하며 주어진 인원 수를 수용할 수 있는 방들의 정보를 가격 오름차순으로 가져옴.
 		String sql = "SELECT r.roomNum, r.roomName, r.roomType, r.viewType, r.roomCapacity, r.roomPrice, r.inventory, r.img\n"
 				+ "FROM room r\n"
+
+				// reservation 테이블에서 주어진 체크인과 체크아웃 날짜 조건을 만족하는 데이터를 그룹화하여 해당 기간에 예약된 방의
+				// 개수(daily_reserved_count)를 계산
+				// 계산된 정보를 room 테이블과 결합(LEFT JOIN)
+				// 만약 room 테이블의 특정 방에 해당하는 예약 정보가 reservation 테이블에 없으면 daily_reserved_count는
+				// NULL 값으로 처리
 				+ "LEFT JOIN (\n"
 				+ "    SELECT roomNum, COUNT(*) as daily_reserved_count\n"
 				+ "    FROM reservation\n"
 				+ "    WHERE (checkIn <= TO_DATE( ? , 'YYYY-MM-DD') AND checkOut > TO_DATE( ? , 'YYYY-MM-DD')) \n"
 				+ "    GROUP BY roomNum\n"
 				+ ") res ON r.roomNum = res.roomNum\n"
+
+				// 방의 수용 인원(roomCapacity)이 주어진 인원 수(totalAmount)보다 크거나 같아야함
+				// COALESCE 함수는 첫 번째 인자의 값이 NULL인 경우 두 번째 인자의 값을 반환하고
+				// 해당 방에 대한 예약이 없으면 daily_reserved_count 값이 NULL이므로, 이 경우 0을 반환한다.
+				// 따라서 해당 방의 예약된 개수가 해당 방의 재고(inventory)보다 작아야 한다는 조건을 나타냄
 				+ "WHERE r.roomCapacity >= ? \n"
 				+ "AND COALESCE(res.daily_reserved_count, 0) < r.inventory "
+
+				// 결과를 방의 가격(roomPrice)에 따라 오름차순으로 정렬
 				+ "ORDER BY r.roomPrice ASC";
 		Connection conn = null;
 		PreparedStatement ps = null;
@@ -73,60 +88,60 @@ public class SigniedSearchDAO {
 		return list;
 	}
 
-	public List<RoomVO> detailSearchRoom(String sort, List<String> viewTypes, List<String> roomTypes)
+	public List<RoomVO> detailSearchRoom(String sort, List<String> viewTypes, List<String> roomTypes,
+			List<RoomVO> roomLists)
 			throws SQLException {
-		StringBuilder query = new StringBuilder("SELECT * FROM room WHERE 1=1");
-		Connection conn = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-		RoomVO vo = null;
 		List<RoomVO> roomList = new ArrayList<RoomVO>();
+
+		// roomNum 리스트 가져오기
+		List<Integer> roomNums = roomLists.stream().map(RoomVO::getRoomNum).collect(Collectors.toList());
 
 		List<String> conditions = new ArrayList<>();
 
-		if (viewTypes != null) {
-			StringJoiner viewCondition = new StringJoiner("', '", "viewtype IN ('", "')");
+		// roomNums를 조건에 추가
+		StringJoiner roomNumCondition = new StringJoiner(", ", "roomNum IN (", ")");
+		for (Integer roomNum : roomNums) {
+			roomNumCondition.add(roomNum.toString());
+		}
+		conditions.add(roomNumCondition.toString());
+
+		if (viewTypes != null && !viewTypes.isEmpty()) {
+			StringJoiner viewCondition = new StringJoiner("', '", "viewType IN ('", "')");
 			for (String viewType : viewTypes) {
-				// 뷰타입에 대한 입력 검증을 하십시오 (예: Enum을 사용하여 확인)
 				viewCondition.add(viewType);
 			}
 			conditions.add(viewCondition.toString());
 		}
 
-		if (roomTypes != null) {
-			StringJoiner bedCondition = new StringJoiner("', '", "roomtype IN ('", "')");
-			for (String bedType : roomTypes) {
-				// 침대타입에 대한 입력 검증을 하십시오 (예: Enum을 사용하여 확인)
-				bedCondition.add(bedType);
+		if (roomTypes != null && !roomTypes.isEmpty()) {
+			StringJoiner roomTypeCondition = new StringJoiner("', '", "roomType IN ('", "')");
+			for (String roomType : roomTypes) {
+				roomTypeCondition.add(roomType);
 			}
-			conditions.add(bedCondition.toString());
+			conditions.add(roomTypeCondition.toString());
 		}
 
-		// 정렬 조건
-		String orderBy = "";
-		if (sort.equals("asc")) {
-			orderBy = "ORDER BY roomprice ASC";
-		} else if (sort.equals("desc")) {
-			orderBy = "ORDER BY roomprice DESC";
+		String orderBy;
+		if ("asc".equalsIgnoreCase(sort)) {
+			orderBy = "ORDER BY roomPrice ASC";
+		} else if ("desc".equalsIgnoreCase(sort)) {
+			orderBy = "ORDER BY roomPrice DESC";
+		} else {
+			throw new IllegalArgumentException("Invalid sort type: " + sort);
 		}
 
-		// SQL 쿼리 구성
 		String sql = "SELECT * FROM room";
 		if (!conditions.isEmpty()) {
 			sql += " WHERE " + String.join(" AND ", conditions);
 		}
 		sql += " " + orderBy;
 
-		// DB 연결 및 쿼리 실행
-		try {
-			conn = DBManager.getConnection();
-			ps = conn.prepareStatement(sql);
-			rs = ps.executeQuery();
+		try (Connection conn = DBManager.getConnection();
+				PreparedStatement ps = conn.prepareStatement(sql);
+				ResultSet rs = ps.executeQuery()) {
 
-			// 결과 처리
 			while (rs.next()) {
-				// 각 호텔 정보 처리 (예: 출력 또는 객체화)
-				vo = new RoomVO();
+				RoomVO vo = new RoomVO();
 				vo.setRoomNum(rs.getInt("roomNum"));
 				vo.setRoomName(rs.getString("roomName"));
 				vo.setRoomType(rs.getString("roomType"));
@@ -140,12 +155,7 @@ public class SigniedSearchDAO {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-			// 오류 처리
-		} finally {
-			DBManager.close(conn, ps, rs);
 		}
-
 		return roomList;
-
 	}
 }
