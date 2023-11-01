@@ -63,7 +63,7 @@ public class ActionFactory {
 			action = new ReservationPassCheckForm();
 		else if (command.equals("Reservation_check_pass"))
 			action = new ReservationCheckPass();
-		else if (command.equals("Reservation_delete")) 
+		else if (command.equals("Reservation_delete"))
 			action = new ReservationDelete();
 
 		return action;

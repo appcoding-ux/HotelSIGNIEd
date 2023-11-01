@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <div class="header">
-	<a href="index.jsp"><img src="hotel_logo.png" alt="호텔로고사진"></a>
+	<a href="index.jsp"><img src="image/hotel_logo.png" alt="호텔로고사진"></a>
 
 	<nav>
 		<ul>

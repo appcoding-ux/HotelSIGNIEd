@@ -16,7 +16,7 @@ ul,li,ol {list-style: none; margin:0; padding:0;}
 .header > nav > ul {width:100%;}
 .header > nav > ul li {width:200px; height:100%; float:left; margin:0 10px; line-height: 80px; position:relative;}
 .header > nav > ul li a {font-size:17px; padding:20px 14px; color:#333;}
-.header > nav > ul li:first-child::before {content:""; position: absolute; left:-5px; top:30px; width:16px; height:16px; background:url("../search.png") no-repeat left -1px;}
+.header > nav > ul li:first-child::before {content:""; position: absolute; left:-5px; top:30px; width:16px; height:16px; background:url("../image/search.png") no-repeat left -1px;}
 
 /* 슬라이더 */
 .slideWrap {width:100%; height:920px; overflow: hidden; position: absolute; top:0; left:0; height:920px;}
@@ -69,7 +69,7 @@ ul,li,ol {list-style: none; margin:0; padding:0;}
 .sertchButton:hover {background: #fff; color: #998465;}
 
 /* 데이터 검색 달력 */
-.dateInput {opacity: 0; top:40px; position:absolute; z-index:100; left:200px; width:1000px; text-align: left; background-color: #fff; border-radius: 10px; box-shadow: 0 15px 60px 0 rgba(0,0,0,0.15); overflow: hidden; outline-offset: 2px; min-height: 343px;}
+.dateInput {display:none ; top:40px; position:absolute; z-index:100; left:200px; width:1000px; text-align: left; background-color: #fff; border-radius: 10px; box-shadow: 0 15px 60px 0 rgba(0,0,0,0.15); overflow: hidden; outline-offset: 2px; min-height: 343px;}
 .dateInput div {float:left;}
 .datePerson {margin:40px 0 20px 60px;}
 .datePerson input:nth-child(2) {text-align: center;}

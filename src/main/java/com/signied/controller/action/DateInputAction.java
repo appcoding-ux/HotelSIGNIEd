@@ -16,7 +16,6 @@ public class DateInputAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, Exception {
-
 		RoomVO vo = new RoomVO();
 
 		System.out.println("달력 : " + request.getParameter("data"));
@@ -59,6 +58,5 @@ public class DateInputAction implements Action {
 		response.setCharacterEncoding("utf-8");
 
 		response.getWriter().write(result.toString());
-
 	}
 }

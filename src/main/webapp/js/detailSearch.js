@@ -148,87 +148,108 @@ $(function () {
 
 //index 페이지의 어른, 어린이 인원수 +- 버튼 작동
 function add(targetId) {
-   let adultAmount = document.getElementById('adultAmount').value;
-   let childAmount = document.getElementById('childAmount').value;
-   let totalAmount = parseInt(adultAmount) + parseInt(childAmount);
-   //어른 + 어린이 수 최대 4명까지 가능하도록 함
-   if (totalAmount < 4) {
-      let hm = document.getElementById(targetId);
-      hm.value++;
-   }
-}
+	let adultAmountInput = document.getElementById('adultAmount');
+	let childAmountInput = document.getElementById('childAmount');
+	let totalAmount = parseInt(adultAmountInput.value) + parseInt(childAmountInput.value);
+	let adult = "성인";
+	let child = "어린이";
 
+	if (totalAmount >= 4) {
+		// 어른 + 어린이 수량이 4 이상이면 값을 증가시키지 않음
+		return;
+	}
+
+	let hm = document.getElementById(targetId);
+	hm.value++;
+	if (targetId === 'adultAmount') {
+		hm.nextElementSibling.textContent = adult + hm.value;
+	} else {
+		hm.nextElementSibling.textContent = child + hm.value;
+	}
+}
 function del(targetId) {
-   let hm = document.getElementById(targetId);
-   if (targetId === 'adultAmount' && hm.value <= 1) {
-      // 어른 수량이 1 이하일 때는 값을 감소시키지 않음
-      return;
-   }
-   if (hm.value > 0) {
-      hm.value--;
-   }
+	let hm = document.getElementById(targetId);
+	let adult = "성인";
+	let child = "어린이";
+
+	if (targetId === 'adultAmount' && hm.value <= 1) {
+		// 어른 수량이 1 이하일 때는 값을 감소시키지 않음
+		return;
+	}
+
+	if (hm.value > 0) {
+		hm.value--;
+		if (targetId === 'adultAmount') {
+			hm.nextElementSibling.textContent = adult + hm.value;
+		} else {
+			hm.nextElementSibling.textContent = child + hm.value;
+		}
+	}
 }
 
-$(function () {
-   $('.amounts').click(function () {
-      $.ajax({
-         url: 'HotelServlet?command=people_num', // 서버 엔드포인트 URL을 입력
-         type: 'get',
-         data: {
-            adultAm: $('#adultAmount').val(),
-            childAm: $('#childAmount').val()
-         },
-         success: function (response) {
-            var amountView = response.amountView;
-            var amountView2 = response.amountView2;
-            console.log(amountView);
-            console.log(amountView2);
-            // 서버에서 반환된 응답을 hotelCheckinAndCheckout div에 표시
-            $('.person_num').eq(1).text(amountView);
-            $('.person_num').eq(2).text(amountView2);
-         },
-         error: function () {
-            console.log("에러 발생", textStatus, errorThrown);
-         }
-      })
-   });
+
+$(function() {
+	$('.amounts').click(function() {
+
+		$.ajax({
+			url: 'HotelServlet?command=people_num', // 서버 엔드포인트 URL을 입력
+			type: 'get',
+			data: {
+				adultAm: $('#adultAmount').val(),
+				childAm: $('#childAmount').val()
+			},
+			success: function(response) {
+				var amountView = response.amountView;
+				var amountView2 = response.amountView2;
+				console.log(amountView);
+				console.log(amountView2);
+				// 서버에서 반환된 응답을 hotelCheckinAndCheckout div에 표시
+				$('.person_num').eq(1).text(amountView);
+				$('.person_num').eq(2).text(amountView2);
+			},
+			error: function() {
+				console.log("에러 발생", textStatus, errorThrown);
+
+			}
+		})
+	});
 })
 
 function amountCount() {
-   var amountView = $('.person_num').eq(1).text();
-   var amountView2 = $('.person_num').eq(2).text();
-   var date1 = $('.date_day').eq(0).text();
-   var date2 = $('.date_day').eq(1).text();
-   var bak = $('.night').text();
-   var roomNum = $('#roomNum').val();
-   var roomName = $('#roomName').val();
-   var roomPrice = $('#roomPrice').val();
-   var img = $('#img').val();
+	var amountView = $('.person_num').eq(1).text();
+	var amountView2 = $('.person_num').eq(2).text();
+	var date1 = $('.date_day').eq(0).text();
+	var date2 = $('.date_day').eq(1).text();
+	var bak = $('.night').text();
+	var roomNum = $('#roomNum').val();
+	var roomName = $('#roomName').val();
+    var roomPrice = $('#roomPrice').val();
+    var img = $('#img').val();
 
-   $('.command').append("<input type='hidden' value='" + amountView + "' name='adultCount' />");
-   $('.command').append("<input type='hidden' value='" + amountView2 + "' name='childCount' />");
-   $('.command').append("<input type='hidden' value='" + roomNum + "' name='roomNum' />");
-   $('.command').append("<input type='hidden' value='" + date1 + "' name='checkIn' />");
-   $('.command').append("<input type='hidden' value='" + date2 + "' name='checkOut' />");
-   $('.command').append("<input type='hidden' value='" + bak + "' name='bak' />");
-   $('.command').append("<input type='hidden' value='" + dateIn + "' name='originCheckIn' />");
-   $('.command').append("<input type='hidden' value='" + dateIn2 + "' name='originCheckout' />");
-   $('.command').append("<input type='hidden' value='" + roomName + "' name='roomName' />");
-   $('.command').append("<input type='hidden' value='" + roomPrice + "' name='roomPrice' />");
-   $('.command').append("<input type='hidden' value='" + img + "' name='img' />");
+	$('.command').append("<input type='hidden' value='" + amountView + "' name='adultCount' />");
+	$('.command').append("<input type='hidden' value='" + amountView2 + "' name='childCount' />");
+	$('.command').append("<input type='hidden' value='" + roomNum + "' name='roomNum' />");
+	$('.command').append("<input type='hidden' value='" + date1 + "' name='checkIn' />");
+	$('.command').append("<input type='hidden' value='" + date2 + "' name='checkOut' />");
+	$('.command').append("<input type='hidden' value='" + bak + "' name='bak' />");
+	$('.command').append("<input type='hidden' value='" + dateIn + "' name='originCheckIn' />");
+	$('.command').append("<input type='hidden' value='" + dateIn2 + "' name='originCheckout' />");
+	$('.command').append("<input type='hidden' value='" + roomName + "' name='roomName' />");
+    $('.command').append("<input type='hidden' value='" + roomPrice + "' name='roomPrice' />");
+    $('.command').append("<input type='hidden' value='" + img + "' name='img' />");
 }
 
 function closeButton(e) {
-   if ($(e.target).hasClass('background'))  // Check if the click was on the .background element
-      $('.detailSearch').stop().hide(300);
-   $(".background").removeClass(" show"); // Add the "show" class back
+	if ($(e.target).hasClass('background'))  // Check if the click was on the .background element
+		$('.detailSearch').stop().hide(300);
+	$(".background").removeClass(" show"); // Add the "show" class back
 }
 
 
 function submitForm(e) {
-   if ($(e.target).hasClass('background'))  // Check if the click was on the .background element
-      $('.detailSearch').stop().hide(300);
-   $(".background").removeClass(" show"); // Add the "show" class back
+	if ($(e.target).hasClass('background'))  // Check if the click was on the .background element
+		$('.detailSearch').stop().hide(300);
+ 	$(".background").removeClass(" show"); // Add the "show" class back
 
-   amountCount();
+	amountCount();
 }
