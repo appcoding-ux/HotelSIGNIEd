@@ -201,6 +201,9 @@ function amountCount() {
    var date2 = $('.date_day').eq(1).text();
    var bak = $('.night').text();
    var roomNum = $('#roomNum').val();
+   var roomName = $('#roomName').val();
+   var roomPrice = $('#roomPrice').val();
+   var img = $('#img').val();
 
    $('.command').append("<input type='hidden' value='" + amountView + "' name='adultCount' />");
    $('.command').append("<input type='hidden' value='" + amountView2 + "' name='childCount' />");
@@ -210,6 +213,9 @@ function amountCount() {
    $('.command').append("<input type='hidden' value='" + bak + "' name='bak' />");
    $('.command').append("<input type='hidden' value='" + dateIn + "' name='originCheckIn' />");
    $('.command').append("<input type='hidden' value='" + dateIn2 + "' name='originCheckout' />");
+   $('.command').append("<input type='hidden' value='" + roomName + "' name='roomName' />");
+   $('.command').append("<input type='hidden' value='" + roomPrice + "' name='roomPrice' />");
+   $('.command').append("<input type='hidden' value='" + img + "' name='img' />");
 }
 
 function closeButton(e) {

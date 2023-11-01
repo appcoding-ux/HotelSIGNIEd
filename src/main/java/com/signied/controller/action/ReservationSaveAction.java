@@ -12,7 +12,6 @@ public class ReservationSaveAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, Exception {
-
 		ReservationDAO rDao = ReservationDAO.getInstance();
 
 		int roomNum = Integer.parseInt(request.getParameter("roomNum")); // 예약하기 버튼을 클릭했을 때 클릭한 룸 번호
@@ -30,13 +29,13 @@ public class ReservationSaveAction implements Action {
 		request.setAttribute("bak", request.getParameter("bak")); // 숙박 일 수 
 		request.setAttribute("roomNum", roomNum); // 클릭한 룸 번호
 
-		if (roomAvailable == true) { // 제고가 남아있을 경우
+		if (roomAvailable == true) { // 재고가 남아있을 경우
 			String url = "ReservationForm.jsp";
 
 			RequestDispatcher dis = request.getRequestDispatcher(url);
 			dis.forward(request, response);
 			
-		} else { // 제고가 없는 경우 다시 roomlist.jsp로 forward시킨다.
+		} else { // 재고가 없는 경우 다시 roomlist.jsp로 forward시킨다.
 			RequestDispatcher dis = request.getRequestDispatcher("roomList.jsp");
 			dis.forward(request, response);
 		}

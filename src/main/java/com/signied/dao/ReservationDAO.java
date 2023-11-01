@@ -23,7 +23,7 @@ public class ReservationDAO {
 	// 예약조회
 	public ReservationVO selectOneByNum(int num) {
 		ReservationVO vo = null;
-		String sql = "select * from reservation where RESERVENUM = ?";
+		String sql = "select * from reservation where RESERVENUM =?";
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -56,47 +56,10 @@ public class ReservationDAO {
 		return vo;
 	}
 
-	public List<ReservationVO> selectAllBoards() {
-
-		List<ReservationVO> list = new ArrayList<ReservationVO>();
-		ReservationVO vo = null;
-		String sql = "select * from reservation where reserveNum = ?";
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-
-		try {
-			conn = DBManager.getConnection();
-			pstmt = conn.prepareStatement(sql);
-			rs = pstmt.executeQuery();
-
-			if (rs.next()) {
-				vo = new ReservationVO();
-				vo.setReserveNum(rs.getInt("reserveNum"));
-				vo.setReserveEmail(rs.getString("reserveEmail"));
-				vo.setReservePwd(rs.getString("reservePwd"));
-				vo.setReserveName(rs.getString("reserveName"));
-				vo.setReservePhone(rs.getString("reservePhone"));
-				vo.setCheckIn(rs.getString("checkIn"));
-				vo.setCheckOut(rs.getString("checkOut"));
-				vo.setGuestNum(rs.getInt("guestNum"));
-				vo.setBreakfast(rs.getInt("breakfast"));
-				vo.setRoomNum(rs.getInt("roomNum"));
-
-				list.add(vo);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			DBManager.close(conn, pstmt, rs);
-		}
-		return list;
-	}
-
 	// 예약등록
 	public int insertReservation(ReservationVO vo1) {
 		int result = -1;
-		String sql = "insert into RESERVATION values (RESERVATION_SEQ.nextval, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		String sql = "insert into RESERVATION values(RESERVATION_SEQ.nextval, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 

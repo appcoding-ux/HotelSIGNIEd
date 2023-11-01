@@ -134,14 +134,13 @@
             <input type="hidden" name="command" value="Reservation_save" />
             <input type="hidden" name="bak" value="${bak}" />
             <input type="hidden" name="originCheckIn" value="${originCheckIn}" />
-            <input type="hidden" name="originCheckout" value="${originCheckOut}" />
+            <input type="hidden" name="originCheckOut" value="${originCheckOut}" />
             <input type="hidden" name="checkIn" value="${checkIn}" />
             <input type="hidden" name="checkOut" value="${checkOut}" />
             <input type="hidden" name="adultAmount" value="${adult}" />
             <input type="hidden" name="childAmount" value="${child}" />
-            <input type="hidden" name="roomList" value="${roomList}" />
             
-           <c:forEach var="room" items="${roomList }">
+           <c:forEach var="room" items="${roomList}">
             <input type="hidden" name="roomNum" value="${room.roomNum}" id="roomNum" />
             <input type="hidden" name="roomName" value="${room.roomName}" id="roomName" />
             <input type="hidden" name="img" value="${room.img}" id="img" />

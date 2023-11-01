@@ -1,4 +1,3 @@
-
 h2, h5 {
     text-align: center;
     margin-top: 0;
@@ -89,10 +88,12 @@ body{
 
 }
 .txt-area{
-    font-size: 18px;
-    padding: 24px;
+    font-size:22px;
+    padding: 30px;
     border-bottom: 1px solid #dcdcdc;
 	float:right;
+	margin-top: 135px;
+	margin-right: 50px;
 }
 li{
 	margin-bottom: 40px;
@@ -106,6 +107,11 @@ li{
 }
 .totalprice{
 	text-align: right;
+	margin-bottom: 50px;
+	margin-top: 30px;
+	margin-right: 50px;
+	border-bottom: 1px solid #dcdcdc;
+	height: 50px;
 }
 .total-price{
 	text-align: center;
@@ -120,6 +126,26 @@ li{
 	margin-top: 100px;
 	text-align: center;
 }
-img{
-	width: 40%;  
+.img-area{
+	width: 30%;  
 }
+.reservation-room-info{
+	text-align: center;
+	width: 100%;
+	padding: 10px 10px 10px 10px;
+}
+
+.stepProcess {padding-top:120px; margin-bottom:60px;}
+.process_col {display: block; letter-spacing: 0; max-width:1170px; margin:24px auto 24px; padding:0 20px; text-align: center; }
+.process_col li {position:relative; display: inline-block; padding-right:60px;}
+.process_col li:nth-child(3) > a{color:#ad9e87;}
+.process_col li::before {content:""; position:absolute; right:-4px; top:calc(50% - 1px); width:40px; height:2px; background:#dcdcdc;}
+.process_col li:last-child::before {background:#fff;}
+
+.process_col li a {position:relative; display: block; padding-left:34px; line-height: 40px; font-size:16px; color:#999; font-weight:600;}
+
+.list_first > a::before {content:"1"; position:absolute; left:0; top:calc(50% - 12px); width:24px; height:24px; border-radius: 50%; text-align: center; line-height:22px; border:1px solid #999; font-size:14px; background: #999; color:#fff;}
+
+.list_second > a::before {content:"2"; position:absolute; left:0; top:calc(50% - 12px); width:24px; height:24px; border-radius: 50%; text-align: center; line-height:22px; border:1px solid #999; font-size:14px; background: #999; color:#fff;}
+
+.list_third > a::before {content:"3"; position:absolute; left:0; top:calc(50% - 12px); width:24px; height:24px; border-radius: 50%; text-align: center; line-height:22px; border:1px solid #ad9e87; font-size:14px; background: #ad9e87; color:#fff;}

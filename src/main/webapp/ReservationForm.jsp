@@ -23,8 +23,17 @@
 </head>
 <body>
 	<jsp:include page="header.jsp" />
+
+	<div class="stepProcess">
+		<ul class="process_col">
+			<li class="list_first"><a href="#">호텔 선택</a></li>
+			<li class="list_second"><a href="#">객실 선택</a></li>
+			<li class="list_third"><a href="#">예약정보 입력</a></li>
+		</ul>
+	</div>
+
 	<div
-		style="margin:240px auto 0; width: 1320px; position: relative; z-index: 1000;">
+		style="margin:130px auto 0; width: 1320px; position: relative; z-index: 101;">
 
 		<form name="frm" method="post" action="HotelServlet">
 			<input type="hidden" name="command" value="Reservation_complete">
@@ -36,9 +45,7 @@
 			<input type="hidden" name="roomNum" value="${roomNum}" />
 
 			<div class="reservation-room-info">
-				<div class="img-area m-none">
-					<img src="image/karina.png" alt="karina">
-
+					<img src="image/karina.png" alt="karina" class="pic">
 					<div class="txt-area">
 						<li><span class="type">호텔 및 객실</span> <span
 							class="info htlAndRms">${roomName}</span></li>
@@ -52,15 +59,11 @@
 							class="info">객실 1, 성인${adult} , 어린이${child} </span></li>
 
 					</div>
-				</div>
-
+			</div>
 				<div class="totalprice">
 					<span class="total-price">총 요금</span> <span class="total-number">${roomPrice}</span>
-
-
+					<span class="won">KRW</span>
 				</div>
-
-			</div>
 
 			<div class="reservation-title">
 				<h3>예약자 정보</h3>
@@ -75,25 +78,26 @@
 
 				<label for="phone" class="input-title">예약자 전화번호 *</label><br> <input
 					class="reservationBox" type="text" name="phone" size="20"
-					title="예약자 전화번호" placeholder="ex)010-****-****" id="phone" required>
+					title="예약자 전화번호" placeholder="ex)010********" id="phone" required>
 
 				<hr class="inquiry-hr">
 
 				<label for="email" class="input-title">예약자 이메일 *</label><br> <input
 					class="reservationBox" type="text" name="email" size="20"
 					title="예약자 이메일" placeholder="ex)abc@naver.com" id="email" required>
+				
+				<hr class="inquiry-hr">
+					
+				<label for="pwd" class="input-title">예약자 비밀번호 *</label><br> <input
+					class="reservationBox" type="password" name="pwd" size="20"
+					title="예약자 비밀번호" placeholder="4자리비밀번호" id="pwd" required maxlength="4">
 			</div>
 
 			<button type="submit" name="confirm" value="확인"
 				onclick="return ReservationValue()" class="submitButton">
 				<span>확인</span>
 			</button>
-
-
 		</form>
 	</div>
-
-
-
 </body>
 </html>

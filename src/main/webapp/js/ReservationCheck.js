@@ -11,28 +11,8 @@ function ReservationCheck() {
 	return true;
 }
 
-
-function ReservationValue() {
-
-
-	var email = userinput.email.value
-	var exptext = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
-
-	if (exptext.test(email) == false) {
-
-		//이메일 형식이 알파벳+숫자@알파벳+숫자.알파벳+숫자 형식이 아닐경우			
-
-		alert("이메일형식이 올바르지 않습니다.");
-
-		userinput.email.focus();
-
-		return false;
-	}
-	return true;
-}
-
 function open_win(url, name) {
-	window.open(url, name, "width = 500, height=230");
+	window.open(url, name, "width = 500, height=300, resizeable = no");
 }
 
 function ReservationPassCheck() {

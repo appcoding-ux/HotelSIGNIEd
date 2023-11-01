@@ -8,6 +8,6 @@ public class ReservationIuquiryAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, Exception {
-		response.sendRedirect("index.jsp");
+		response.sendRedirect("ReservationCancleAlert.jsp");
 	}
 }

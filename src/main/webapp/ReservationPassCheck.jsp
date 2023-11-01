@@ -1,28 +1,31 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="css/passcheck.css">
 <script src="js/ReservationCheck.js" type="text/javascript"></script>
 </head>
 <body>
 <div align="center">
-	<h1>¿¹¾à ºñ¹Ğ¹øÈ£ È®ÀÎ</h1>
-	<form action="HotelServlet" name="frm" method="get">
-		<input type="hidden" name="command" value="Reservation_check_pass">
-		<input type="hidden" name="num" value="${param.num}"> <%-- request.getParameter => param --%>
-		<br>
-		<br>
-		<table style="width: 80%">
-			<tr>ºñ¹Ğ¹øÈ£</tr>
-			<td><input type="password" name="pass" size="20"></td>
-		</table>
-		<br>
-		<input type="submit" value="È®ÀÎ" onclick="return ReservationPassCheck()">
-		<br><br>${message}
-	</form>
+   <h1>ì˜ˆì•½ ë¹„ë°€ë²ˆí˜¸ í™•ì¸</h1>
+   <form action="HotelServlet" name="frm" method="get">
+      <input type="hidden" name="command" value="Reservation_check_pass">
+      <input type="hidden" name="num" value="${param.num}"> <%-- request.getParameter => param --%>
+      <br>
+      <br>
+      <table style="width: 80%">
+         <tr>ë¹„ë°€ë²ˆí˜¸</tr>
+         <td><input type="password" name="pass" size="20"></td>
+      </table>
+      <br>
+   <div class = "button">
+      <input type="submit" value="í™•ì¸" onclick="return ReservationPassCheck()">
+   </div>
+      <br><br>${message}
+   </form>
 </div>
 
 </body>
