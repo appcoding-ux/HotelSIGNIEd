@@ -1,5 +1,6 @@
 package com.signied.controller.action;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,8 +12,6 @@ public class ReservationComplete implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, Exception {
-		String url = null;
-		System.out.println(url);
 		ReservationVO vo = new ReservationVO();
 
 		vo.setReserveEmail(request.getParameter("email"));
@@ -30,9 +29,10 @@ public class ReservationComplete implements Action {
 		System.out.println("vo :" + vo);
 
 		if (result == 1) {
-			url = "ReservationSuccessAlert.jsp";
+			request.setAttribute("result", 2);
+			RequestDispatcher dis = request.getRequestDispatcher("index.jsp");
+			dis.forward(request, response);
 		}
 		
-		response.sendRedirect(url);
 	}
 }

@@ -16,8 +16,7 @@ public class ReservationCheckPass implements Action {
 		
 		String pass = request.getParameter("pass");
 		int num = Integer.parseInt(request.getParameter("num"));
-		System.out.println("pass : " + pass);
-		System.out.println("num : " + num);
+
 		
 		ReservationDAO rDao = ReservationDAO.getInstance();
 		ReservationVO vo = rDao.selectOneByNum(num);

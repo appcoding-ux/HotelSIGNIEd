@@ -21,7 +21,7 @@ public class PageVO {
 		this.amount = amount;
 		this.total = total;
 		
-		// 공식 = (int)Math.ceil(페이지버호 / 페이지네이션개수) * 한 페이지에 보여질 게시글 수
+		// 공식 = (int)Math.ceil(페이지번호 / 페이지네이션개수) * 한 페이지에 보여질 게시글 수
 		this.endPage = (int)Math.ceil(this.pageNum * 0.14) * 7;
 		
 		// 시작 페이지 = 끝페이지 - 한 페이지에 보여질 게시글 수 + 1

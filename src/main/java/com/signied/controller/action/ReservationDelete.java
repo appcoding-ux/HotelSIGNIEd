@@ -1,5 +1,6 @@
 package com.signied.controller.action;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,7 +17,9 @@ public class ReservationDelete implements Action {
 		int result = rDao.deleteReservation(num);
 		
 		if(result == 1) {
-			new ReservationIuquiryAction().execute(request, response);
+			request.setAttribute("result", result);
+			RequestDispatcher dis = request.getRequestDispatcher("index.jsp");
+			dis.forward(request, response);
 		}
 	}
 }

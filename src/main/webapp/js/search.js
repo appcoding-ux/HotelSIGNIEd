@@ -1,14 +1,14 @@
 var dateIn = "";
 var dateIn2 = "";
 
-$(function () {
-	$("#show").click(function (e) {
+$(function() {
+	$("#show").click(function(e) {
 		e.preventDefault();
 		$(".background").addClass(" show"); // Remove the "show" class
 		$('.detailSearch').stop().show();
 	});
 
-	$('.background').click(function (e) {
+	$('.background').click(function(e) {
 		if ($(e.target).hasClass('background')) { // Check if the click was on the .background element
 			$('.detailSearch').stop().hide(300);
 			$(".background").removeClass(" show"); // Add the "show" class back
@@ -17,7 +17,7 @@ $(function () {
 
 	$('.price-btn label').eq(0).css({ background: "#dcdcdc", "color": "#333" });
 
-	$('.price-btn input').on('change', function () {
+	$('.price-btn input').on('change', function() {
 		// 모든 라디오 버튼과 연결된 라벨의 스타일 초기화
 		$('.price-btn input').siblings('.sort_label').css({ "background": "#fff", "color": "#999" });
 
@@ -28,16 +28,13 @@ $(function () {
 		$('.price-btn input').not(this).prop('checked', false);
 	});
 
-	$('.typeBtn input').on('change', function () {
+	$('.typeBtn input').on('change', function() {
 		if ($(this).prop('checked')) {
 			$(this).siblings('.type_label').css({ backgroundColor: "#6f6051", color: "#fff" });
 		} else {
 			$(this).siblings('.type_label').css({ backgroundColor: "#fff", color: "#333" });
 		}
 	});
-
-
-
 });
 
 
@@ -45,18 +42,18 @@ function resetButton() {
 	$('.type_label').css({ backgroundColor: "#fff", color: "#333" });
 }
 
-$(function () {
-	$('.sertchClick > a').click(function (e) {
+$(function() {
+	$('.sertchClick > a').click(function(e) {
 		e.preventDefault();
 		$('.sertchWrap').stop().slideToggle();
 	});
 
-	$('.date_anchor').click(function (e) {
+	$('.date_anchor').click(function(e) {
 		e.preventDefault();
 		var dateInput = $('.dateInput');
 		if (dateInput.css('top') === '80px' && dateInput.css('display') === 'block') {
 			// 현재 상태가 top: 80px이고 display: block인 경우
-			dateInput.animate({ top: 40 }, 600, function () {
+			dateInput.animate({ top: 40 }, 600, function() {
 				dateInput.hide(300);
 			});
 		} else {
@@ -73,8 +70,6 @@ $(function () {
 	const month = ('0' + (oneMonthLater.getMonth() + 1)).slice(-2);
 	const day = ('0' + oneMonthLater.getDate()).slice(-2);
 	const dateStr = `${year}-${month}-${day}`;
-	console.log(dateStr);
-
 
 	var input = document.getElementById('input-id');
 	var datepicker = new HotelDatepicker(input, {
@@ -122,7 +117,7 @@ $(function () {
 			'aria-clear-button': '선택된 날짜 지우기',
 			'aria-submit-button': '확인 버튼'
 		},
-		onSelectRange: function () {
+		onSelectRange: function() {
 			console.log('날짜 범위가 선택되었습니다!');
 			var inputData = $('#input-id').val(); // input-id의 값을 가져옵니다.
 			var bak = $('#tooltip-input-id').text();
@@ -130,31 +125,26 @@ $(function () {
 				url: 'HotelServlet?command=date_input', // 서버 엔드포인트 URL을 입력합니다.
 				type: 'get',
 				data: { data: inputData, bak: bak },
-				success: function (response) {
+				success: function(response) {
 					var bak = response.bak; // + 추가 bak을 받아와서 출력함
 					$('.night').text(bak);
 					var date1 = response.dateView;
 					var date2 = response.dateView2;
 					dateIn = response.dateIn;
 					dateIn2 = response.dateIn2;
-					console.log(date1);
-					console.log(date2);
+					$('#originCheckIn').val(dateIn); // 날짜를 재선택했을 때 이미 있는 input:hidden의 value값을 교체한다.
+					$('#originCheckOut').val(dateIn2); // 날짜를 재선택했을 때 이미 있는 input:hidden의 value값을 교체한다.
+					console.log(dateIn);
+					console.log(dateIn2);
 					// 서버에서 반환된 응답을 hotelCheckinAndCheckout div에 표시합니다.
 					$('.date_day').eq(0).text(date1);
 					$('.date_day').eq(1).text(date2);
 				},
-				error: function () {
+				error: function() {
 					console.log("에러 발생");
-
 				}
 			});
-
 		},
-
-		/*onBasicRange: function(){
-		  console.log('기본 날짜 범위를 출력합니다!');
-	   }*/
-
 	});
 });
 
@@ -200,8 +190,8 @@ function del(targetId) {
 }
 
 
-$(function () {
-	$('.amounts').click(function () {
+$(function() {
+	$('.amounts').click(function() {
 		$.ajax({
 			url: 'HotelServlet?command=people_num', // 서버 엔드포인트 URL을 입력
 			type: 'get',
@@ -209,7 +199,7 @@ $(function () {
 				adultAm: $('#adultAmount').val(),
 				childAm: $('#childAmount').val()
 			},
-			success: function (response) {
+			success: function(response) {
 				var amountView = response.amountView;
 				var amountView2 = response.amountView2;
 				console.log(amountView);
@@ -218,49 +208,88 @@ $(function () {
 				$('.person_num').eq(1).text(amountView);
 				$('.person_num').eq(2).text(amountView2);
 			},
-			error: function () {
+			error: function() {
 				console.log("에러 발생", textStatus, errorThrown);
-
 			}
 		})
 	});
 })
 
-//default date 입력
-$(function() {
-   // 서버에서 현재 날짜를 가져오는 요청
-   $.ajax({
-      url: 'HotelServlet?command=get_date',
-      type: 'get',
-      success: function(response) {
-         var date1 = response.dateView;
-         var date2 = response.dateView2;
-         dateIn = response.dateIn;
-         dateIn2 = response.dateIn2;
-         // 가져온 현재 날짜를 이미 존재하는 dateView 엘리먼트에 넣어줌
-         $('.date_day').eq(0).text(date1);
-         $('.date_day').eq(1).text(date2);
-      },
-      error: function() {
-         console.log("에러 발생");
-      }
-   });
-});
 
-function amountCount() {
+function amountCount(e) {
 	var amountView = $('.person_num').eq(1).text();
 	var amountView2 = $('.person_num').eq(2).text();
 	var date1 = $('.date_day').eq(0).text();
 	var date2 = $('.date_day').eq(1).text();
 	var bak = $('.night').text();
-	console.log(date1);
-	console.log(date2);
-	console.log(bak);
+
+	if ($(e).text() == "검색") {
+		$('.command').append("<input type='hidden' value='" + amountView + "' name='adultCount' />");
+		$('.command').append("<input type='hidden' value='" + amountView2 + "' name='childCount' />");
+		$('.command').append("<input type='hidden' value='" + date1 + "' name='checkIn' />");
+		$('.command').append("<input type='hidden' value='" + date2 + "' name='checkOut' />");
+		$('.command').append("<input type='hidden' value='" + bak + "' name='bak' />");
+		$('.command').append("<input type='hidden' value='" + dateIn + "' name='originCheckIn' />");
+		$('.command').append("<input type='hidden' value='" + dateIn2 + "' name='originCheckOut' />");
+	} else {
+		$('.command').append("<input type='hidden' value='" + amountView + "' name='adultCount' />");
+		$('.command').append("<input type='hidden' value='" + amountView2 + "' name='childCount' />");
+		$('.command').append("<input type='hidden' value='" + date1 + "' name='checkIn' />");
+		$('.command').append("<input type='hidden' value='" + date2 + "' name='checkOut' />");
+		$('.command').append("<input type='hidden' value='" + bak + "' name='bak' />");
+	}
+}
+
+// 상세검색에서 x버튼으로 창을 닫을 때
+function closeButton(e) {
+	if ($(e.target).hasClass('background'))  // Check if the click was on the .background element
+		$('.detailSearch').stop().hide(300);
+	$(".background").removeClass(" show"); // Add the "show" class back
+}
+
+// 상세검색의 적용을 눌렀을 때
+function submitForm(e) {
+	if ($(e.target).hasClass('background'))  // Check if the click was on the .background element
+		$('.detailSearch').stop().hide(300);
+	$(".background").removeClass(" show"); // Add the "show" class back
+
+	amountCount();
+}
+
+// 각각의 객실을 예약하기 버튼을 클릭했을 때 그 객실의 정보만 예약 form에 넘겨준다.
+function submitFormWithRoomDetails(roomNum, roomName, img, roomPrice) {
+	var amountView = $('#adultAmount').val();
+	var amountView2 = $('#childAmount').val();
+	var date1 = $('.date_day').eq(0).text();
+	var date2 = $('.date_day').eq(1).text();
+	var bak = $('.night').text();
+
 	$('.command').append("<input type='hidden' value='" + amountView + "' name='adultCount' />");
 	$('.command').append("<input type='hidden' value='" + amountView2 + "' name='childCount' />");
 	$('.command').append("<input type='hidden' value='" + date1 + "' name='checkIn' />");
 	$('.command').append("<input type='hidden' value='" + date2 + "' name='checkOut' />");
 	$('.command').append("<input type='hidden' value='" + bak + "' name='bak' />");
-	$('.command').append("<input type='hidden' value='" + dateIn + "' name='originCheckIn' />");
-	$('.command').append("<input type='hidden' value='" + dateIn2 + "' name='originCheckOut' />");
+	var form = document.getElementById("roomFrm");
+
+	// Add or modify hidden fields with the room details
+	setOrUpdateHiddenInput(form, "roomNum", roomNum);
+	setOrUpdateHiddenInput(form, "roomName", roomName);
+	setOrUpdateHiddenInput(form, "img", img);
+	setOrUpdateHiddenInput(form, "roomPrice", roomPrice);
+
+	// Submit the form
+	form.submit();
+}
+
+function setOrUpdateHiddenInput(form, name, value) {
+	var input = form.querySelector('input[name="' + name + '"]');
+	if (input) {
+		input.value = value;
+	} else {
+		input = document.createElement("input");
+		input.type = "hidden";
+		input.name = name;
+		input.value = value;
+		form.appendChild(input);
+	}
 }

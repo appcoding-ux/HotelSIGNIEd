@@ -34,7 +34,7 @@
          <div class="col-box">
             <label for="email" class="input-title">예약자 이메일 *</label><span></span><br> <input
                class="reservationBox" type="text" name="email" size="20"
-               title="예약자 이메일" placeholder="예약자 이메일을 입력하세요." id="email">
+               title="예약자 이메일" placeholder="예약자 이메일을 입력하세요." id="email" required>
                <div class="alert-message">${message}</div>
                
                <label for="name" class="input-title">예약자 이름 *</label><br>

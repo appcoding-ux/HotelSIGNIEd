@@ -1,10 +1,10 @@
 function ReservationCheck() {
-	if (document.frm.num.value.length == 0) {
-		alert("예약번호를 확인해주세요.");
+	if (document.frm.email.value.length == 0) {
+		alert("예약자 이메일 확인해주세요.");
 		return false;
 	}
 
-	if ($('#num').val() == "") {
+	if ($('#email').val() == "") {
 		alert("예약번호는 필수입력입니다.");
 		return false;
 	}

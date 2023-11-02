@@ -14,7 +14,7 @@
 <script src="hotel-datepicker-main/fecha-4.2.1/dist/fecha.min.js"></script>
 <script src="hotel-datepicker-main/dist/js/hotel-datepicker.js"></script>
 <link rel="stylesheet" href="css/search.css">
-<script src="js/detailSearch.js"></script>
+<script src="js/search.js"></script>
 <!-- 이거 폰트어썸 스크립트로 아이콘 쓸 수 있는 스크립트입니다. -->
 <script src="https://kit.fontawesome.com/f21f7d3508.js"
 	crossorigin="anonymous"></script>
@@ -41,6 +41,8 @@
 					<form action="HotelServlet" name="frm" method="post" id="myForm">
 						<input type="hidden" name="command" value="search_room"
 							class="command" />
+						<input type="hidden" name="originCheckIn" value="${originCheckIn}" id="originCheckIn"/>
+						<input type="hidden" name="originCheckOut" value="${originCheckOut}" id="originCheckOut"/>
 						<div class="hotelName">
 							<label for="name">호텔</label>
 							<div class="input">
@@ -76,7 +78,7 @@
 							<a href="" title="레이어팝업" class="date_anchor"></a>
 						</div>
 						<div class="item_edit">
-							<button type="submit" class="sertchButton"
+							<button type="submit" class="sertchButton" form="myForm"
 								onclick="amountCount()">수 정</button>
 						</div>
 
@@ -147,8 +149,8 @@
 		<div class="roomList">
 			<form action="HotelServlet" name="frm" method="post" id="roomFrm">
 				<input type="hidden" name="command" value="Reservation_save" class="command"/>
-				<input type="hidden" name="originCheckIn" value="${originCheckIn}" /> 
-				<input type="hidden" name="originCheckOut" value="${originCheckOut}" />
+				<input type="hidden" name="originCheckIn" value="${originCheckIn}" id="originCheckIn"/> 
+				<input type="hidden" name="originCheckOut" value="${originCheckOut}" id="originCheckOut"/>
 
 				<c:forEach var="room" items="${roomList }">
 					<div class="record">

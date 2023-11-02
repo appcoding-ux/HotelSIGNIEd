@@ -20,8 +20,7 @@ public class ReservationNumAction implements Action {
 
         String email = request.getParameter("email");
         String name = request.getParameter("name");
-        System.out.println("reserveNum : " + email);
-        System.out.println("reserveName : " + name);
+
 
         ReservationDAO rDao = ReservationDAO.getInstance();
         ReservationVO vo = rDao.selectOneByEmail(email);

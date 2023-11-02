@@ -50,7 +50,7 @@
 					<a href="" title="레이어팝업" class="date_anchor"></a>
 				</div>
 				<div class="item_edit">
-					<button type="submit" class="sertchButton" onclick="amountCount()">검색</button>
+					<button type="submit" class="sertchButton" onclick="amountCount(this)">검색</button>
 				</div>
 
 				<div class="dateInput">

@@ -11,7 +11,7 @@
 <body>
 <div align="center">
    <h1>예약 비밀번호 확인</h1>
-   <form action="HotelServlet" name="frm" method="get">
+   <form action="HotelServlet" name="frm" method="post">
       <input type="hidden" name="command" value="Reservation_check_pass">
       <input type="hidden" name="num" value="${param.num}"> <%-- request.getParameter => param --%>
       <br>
