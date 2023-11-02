@@ -170,8 +170,7 @@
 								<span><fmt:formatNumber type="currency"
 										value="${room.roomPrice}" currencySymbol="￦" /> KRW</span>
 							</div>
-							<button type="button"
-								onclick="submitFormWithRoomDetails('${room.roomNum}', '${room.roomName}', '${room.img}','${room.roomPrice}')">예약하기</button>
+							<button type="button" onclick="submitFormWithRoomDetails('${room.roomNum}', '${room.roomName}','${room.img}' ,'${room.roomPrice}')">예약하기</button>
 						</div>
 					</div>
 				</c:forEach>
