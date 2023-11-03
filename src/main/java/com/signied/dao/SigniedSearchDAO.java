@@ -61,25 +61,24 @@ public class SigniedSearchDAO {
 
 		List<RoomVO> list = new ArrayList<RoomVO>();
 		// 주어진 체크인/체크아웃 날짜에 사용 가능하며 주어진 인원 수를 수용할 수 있는 방들의 정보를 가격 오름차순으로 가져옴.
-		String sql =  "WITH date_range AS (\n"
-	            + "    SELECT TO_DATE(?, 'YYYY-MM-DD') + LEVEL - 1 as the_date\n"
-	            + "    FROM dual\n"
-	            + "    CONNECT BY LEVEL <= TO_DATE(?, 'YYYY-MM-DD') - TO_DATE(?, 'YYYY-MM-DD')\n"
-	            + "),\n"
-	            + "\n"
-	            + "reservation_counts AS (\n"
-	            + "    SELECT res.roomNum, COUNT(DISTINCT d.the_date) AS reserved_days\n"
-	            + "    FROM reservation res\n"
-	            + "    JOIN date_range d ON res.checkIn <= d.the_date AND res.checkOut > d.the_date\n"
-	            + "    GROUP BY res.roomNum\n"
-	            + ")\n"
-	            + "\n"
-	            + "SELECT r.roomNum, r.roomName, r.roomType, r.viewType, r.roomCapacity, r.roomPrice, r.inventory, r.img\n"
-	            + "FROM room r\n"
-	            + "LEFT JOIN reservation_counts rc ON r.roomNum = rc.roomNum\n"
-	            + "WHERE r.roomCapacity >= ? \n"
-	            + "AND COALESCE(rc.reserved_days, 0) < r.inventory\n"
-	            + "ORDER BY r.roomPrice ASC";
+		String sql = "WITH date_range AS (\n"
+				+ "    SELECT TO_DATE(?, 'YYYY-MM-DD') + LEVEL - 1 as the_date\n"
+				+ "    FROM dual\n"
+				+ "    CONNECT BY LEVEL <= TO_DATE(?, 'YYYY-MM-DD') - TO_DATE(?, 'YYYY-MM-DD')\n"
+				+ ")\n"
+				+ "SELECT r.roomNum, r.roomName, r.roomType, r.viewType, r.roomCapacity, r.roomPrice, r.inventory, r.img\n"
+				+ "FROM room r\n"
+				+ "LEFT JOIN reservation res ON r.roomNum = res.roomNum\n"
+				+ "LEFT JOIN date_range d ON res.checkIn <= d.the_date AND res.checkOut > d.the_date\n"
+				+ "WHERE r.roomCapacity >= ?\n"
+				+ "AND r.roomNum NOT IN (\n"
+				+ "    SELECT roomNum\n"
+				+ "    FROM reservation\n"
+				+ "    WHERE (checkOut > ? AND checkIn < ?)\n"
+				+ "    GROUP BY roomNum\n"
+				+ "    HAVING SUM(1) >= r.inventory"
+				+ ")\n"
+				+ "ORDER BY r.roomPrice ASC";
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -92,6 +91,8 @@ public class SigniedSearchDAO {
 			ps.setString(2, checkOut);
 			ps.setString(3, checkIn);
 			ps.setInt(4, totalAmount);
+			ps.setString(5, checkIn);
+			ps.setString(6, checkOut);
 
 			rs = ps.executeQuery();
 
