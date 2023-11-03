@@ -66,18 +66,17 @@ public class SigniedSearchDAO {
 				+ "    FROM dual\n"
 				+ "    CONNECT BY LEVEL <= TO_DATE(?, 'YYYY-MM-DD') - TO_DATE(?, 'YYYY-MM-DD')\n"
 				+ ")\n"
-				+ "SELECT r.roomNum, r.roomName, r.roomType, r.viewType, r.roomCapacity, r.roomPrice, r.inventory, r.img\n"
-				+ "FROM room r\n"
-				+ "LEFT JOIN reservation res ON r.roomNum = res.roomNum\n"
-				+ "LEFT JOIN date_range d ON res.checkIn <= d.the_date AND res.checkOut > d.the_date\n"
-				+ "WHERE r.roomCapacity >= ?\n"
-				+ "AND r.roomNum NOT IN (\n"
+				+ ", booked_rooms AS (\n"
 				+ "    SELECT roomNum\n"
 				+ "    FROM reservation\n"
-				+ "    WHERE (checkOut > ? AND checkIn < ?)\n"
+				+ "    JOIN date_range d ON reservation.checkIn <= d.the_date AND reservation.checkOut > d.the_date\n"
 				+ "    GROUP BY roomNum\n"
-				+ "    HAVING SUM(1) >= r.inventory"
+				+ "    HAVING COUNT(*) >= (SELECT inventory FROM room WHERE roomNum = reservation.roomNum)\n"
 				+ ")\n"
+				+ "SELECT DISTINCT r.roomNum, r.roomName, r.roomType, r.viewType, r.roomCapacity, r.roomPrice, r.inventory, r.img\n"
+				+ "FROM room r\n"
+				+ "WHERE r.roomCapacity >= ?\n"
+				+ "AND r.roomNum NOT IN (SELECT roomNum FROM booked_rooms)\n"
 				+ "ORDER BY r.roomPrice ASC";
 		Connection conn = null;
 		PreparedStatement ps = null;
@@ -91,8 +90,6 @@ public class SigniedSearchDAO {
 			ps.setString(2, checkOut);
 			ps.setString(3, checkIn);
 			ps.setInt(4, totalAmount);
-			ps.setString(5, checkIn);
-			ps.setString(6, checkOut);
 
 			rs = ps.executeQuery();
 
